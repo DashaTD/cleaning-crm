@@ -3,6 +3,7 @@ package com.ronasit.fiesta.ui.login
 import com.ronasit.fiesta.R
 import javax.inject.Inject
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.ronasit.fiesta.di.qualifiers.ViewModelInjection
 import com.ronasit.fiesta.di.ViewModelInjectionField
@@ -50,13 +51,14 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
         transaction.runOnCommit {
             confirmationFragment.viewModel.get().isCodeValid()
                 .observe(this@LoginActivity, Observer {
+
                     onMoveToProfileFragment()
                 })
         }
     }
 
     private fun onMoveToProfileFragment() {
-
+        Toast.makeText(this, "kek", Toast.LENGTH_SHORT).show()
     }
 
     override fun onBackPressed() {
