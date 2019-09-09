@@ -46,8 +46,7 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
         val confirmationFragment = ConfirmationFragment.newInstance()
         val transaction = supportFragmentManager.beginTransaction()
 
-        transaction.replace(R.id.mainContainer, ConfirmationFragment.newInstance())
-        transaction.commitNow()
+        transaction.replace(R.id.mainContainer, confirmationFragment)
         transaction.runOnCommit {
             confirmationFragment.viewModel.get().isCodeValid()
                 .observe(this@LoginActivity, Observer {
@@ -55,6 +54,8 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
                     onMoveToProfileFragment()
                 })
         }
+        transaction.commit()
+
     }
 
     private fun onMoveToProfileFragment() {
