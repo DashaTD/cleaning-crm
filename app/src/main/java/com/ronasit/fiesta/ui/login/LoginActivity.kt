@@ -51,14 +51,14 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
         transaction.runOnCommit {
             confirmationFragment.viewModel.get().isCodeValid()
                 .observe(this@LoginActivity, Observer {
-
+                    Toast.makeText(this, "kek", Toast.LENGTH_SHORT).show()
                     onMoveToProfileFragment()
                 })
         }
     }
 
     private fun onMoveToProfileFragment() {
-        Toast.makeText(this, "kek", Toast.LENGTH_SHORT).show()
+
     }
 
     override fun onBackPressed() {
