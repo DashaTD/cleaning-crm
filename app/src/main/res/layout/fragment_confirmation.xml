@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/confirmation_text_view"
-            style="@style/TextStyle"
+            style="@style/ButtonTextAppearance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="220dp"
@@ -47,7 +47,7 @@
             android:inputType="numberSigned"
             android:padding="14dp"
             android:textAlignment="center"
-            android:textAppearance="@style/TextStyle"
+            android:textAppearance="@style/ButtonTextAppearance"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/confirmation_text_view" />
@@ -60,7 +60,7 @@
             android:layout_marginTop="18dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/confirmation_button_shape"
-            android:textAppearance="@style/TextStyle"
+            android:textAppearance="@style/ButtonTextAppearance"
             android:padding="18dp"
             android:text="@string/confirm_button_text"
             android:textColor="@android:color/white"

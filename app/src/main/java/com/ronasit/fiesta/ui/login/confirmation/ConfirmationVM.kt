@@ -1,5 +1,6 @@
 package com.ronasit.fiesta.ui.login.confirmation
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ronasit.fiesta.base.SingleLiveEvent
@@ -10,6 +11,9 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
 
     val confirmationCode = MutableLiveData<String>()
     private val isCodeValid: SingleLiveEvent<Boolean> = SingleLiveEvent()
+
+    @Inject
+    lateinit var context: Context
 
     fun isCodeValid(): LiveData<Boolean> = isCodeValid
 
