@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ronasit.fiesta.ui.login.confirmation.ConfirmationVM" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/confirmation_text_view"
+            style="@style/TextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="164dp"
+            android:layout_marginRight="16dp"
+            android:lineSpacingExtra="1sp"
+            android:text="@string/confirmation_text" />
+
+        <EditText
+            android:id="@+id/code_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/confirmation_text_view"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="107dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/edit_text_shape"
+            android:hint="@string/confirmation_placeholder"
+            android:inputType="numberSigned"
+            android:padding="14dp"
+            android:textAlignment="center"
+            android:text="@={viewModel.confirmationCode}"/>
+
+        <Button
+            android:id="@+id/confirm_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/code_field"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/confirmation_button_shape"
+            android:padding="14dp"
+            android:text="@string/confirm_button_text"
+            android:textColor="@android:color/white"
+            android:onClick="@{()->viewModel.onConfirmClick()}"/>
+
+    </RelativeLayout>
+</layout>

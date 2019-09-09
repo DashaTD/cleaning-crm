@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Fiesta</string>
+
+    <string name="phone_field_placeholder">Phone number</string>
+    <string name="continue_button_text">Continue</string>
+
+    <string name="confirmation_text"> Confirmation code is sent to \n +1 293 474 6789 </string>
+    <string name="confirmation_placeholder">Code</string>
+    <string name="confirm_button_text">Confirm</string>
 </resources>
