@@ -25,8 +25,34 @@
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:fontFamily">@font/montserrat_bold</item>
-
     </style>
 
+    <style name="MediumTextBold" parent="ButtonTextAppearance">
+        <item name="android:textColor">#000</item>
+    </style>
+    <style name="TitleTextBlack" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+
+    <style name="TitleTextWhite" parent="TitleTextBlack">
+        <item name="android:textColor">#fff</item>
+    </style>
+    <style name="SmallTextBlack" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">11sp</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">#000</item>
+    </style>
+
+    <style name="SmallTextGray" parent="SmallTextBlack">
+        <item name="android:textColor">#999999</item>
+    </style>
+
+    <style name="SmallTextPink" parent="SmallTextBlack">
+        <item name="android:textColor">#D24C95</item>
+    </style>
+    <style name="SmallTextWhite" parent="SmallTextBlack">
+        <item name="android:textColor">#fff</item>
+    </style>
 
 </resources>
