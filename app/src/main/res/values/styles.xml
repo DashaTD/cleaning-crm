@@ -8,7 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
     <style name="TextStyle">
         <item name="android:fontFamily">Montserrat</item>
         <item name="android:textSize">17sp</item>
@@ -56,4 +55,8 @@
         <item name="android:textColor">#fff</item>
     </style>
 
+    <style name="LargeButton" parent="Widget.AppCompat.Button">
+        <item name="android:textAppearance">@style/ButtonTextAppearance</item>
+        <item name="android:background">"@drawable/confirmation_button_shape"</item>
+    </style>
 </resources>
