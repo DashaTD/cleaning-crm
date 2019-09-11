@@ -27,14 +27,13 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
     fun isCodeValid(): LiveData<Boolean> = isCodeValid
 
     fun onConfirmClick() {
-        val code = 1
-        confirmationCode.value?.let {
-                //code ->
-           // if (!code.isEmpty()) {
-                isCodeValid.value = true
-            //} else {
-              //  isCodeValid.value = false
+        isCodeValid.value = validateCode()
+    }
 
-            }
+    private fun validateCode(): Boolean{
+        confirmationCode.value?.let { code ->
+            if(!code.isEmpty()) return true
         }
+        return false
+    }
     }
