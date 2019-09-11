@@ -37,8 +37,8 @@
             android:layout_marginEnd="16dp"
 
             android:layout_marginBottom="18dp"
+            style="@style/EditText"
             android:autofillHints="phone number"
-            android:background="@drawable/edit_text_shape"
             android:hint="@string/phone_field_placeholder"
             android:inputType="phone"
             android:maxLength="17"
