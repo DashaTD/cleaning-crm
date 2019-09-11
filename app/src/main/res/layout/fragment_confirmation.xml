@@ -46,7 +46,7 @@
             android:padding="14dp"
             android:text="@={viewModel.confirmationCode}"
             android:textAlignment="center"
-            android:textAppearance="@style/TextStyle"
+            android:textAppearance="@style/InputHintTextAppearance"
             bind:layout_constraintEnd_toEndOf="parent"
             bind:layout_constraintStart_toStartOf="parent"
             bind:layout_constraintTop_toBottomOf="@+id/confirmation_text_view" />
@@ -62,7 +62,7 @@
             android:onClick="@{()->viewModel.onConfirmClick()}"
             android:padding="18dp"
             android:text="@string/confirm_button_text"
-            android:textAppearance="@style/TextStyle"
+            android:textAppearance="@style/ButtonTextAppearance"
             android:textColor="@android:color/white"
             bind:layout_constraintEnd_toEndOf="parent"
             bind:layout_constraintStart_toStartOf="parent"
