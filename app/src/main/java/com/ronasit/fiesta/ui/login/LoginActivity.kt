@@ -54,7 +54,13 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
         transaction.runOnCommit {
             confirmationFragment.viewModel.get().isCodeValid()
                 .observe(this@LoginActivity, Observer {
-                    onMoveToProfileFragment()
+                    if(it){
+                        Toast.makeText(this, "Valid code", Toast.LENGTH_SHORT).show()
+                        onMoveToProfileFragment()
+                    }
+                    else {
+                        Toast.makeText(this, "Try again", Toast.LENGTH_SHORT).show()
+                    }
                 })
         }
         transaction.commit()
