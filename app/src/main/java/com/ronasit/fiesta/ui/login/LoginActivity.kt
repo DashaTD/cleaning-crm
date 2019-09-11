@@ -1,15 +1,16 @@
 package com.ronasit.fiesta.ui.login
 
-import com.ronasit.fiesta.R
-import javax.inject.Inject
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.ronasit.fiesta.di.qualifiers.ViewModelInjection
+import com.ronasit.fiesta.R
 import com.ronasit.fiesta.di.ViewModelInjectionField
+import com.ronasit.fiesta.di.qualifiers.ViewModelInjection
 import com.ronasit.fiesta.ui.base.BaseActivity
 import com.ronasit.fiesta.ui.login.confirmation.ConfirmationFragment
 import com.ronasit.fiesta.ui.login.signin.SignInFragment
 import dagger.android.support.HasSupportFragmentInjector
+import javax.inject.Inject
 
 class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
 
@@ -37,7 +38,11 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
             .commitNow()
 
         signInFragment.viewModel.get().isPhoneValid().observe(this@LoginActivity, Observer {
-            onMoveToConfimationFragment()
+            if (it) {
+                onMoveToConfimationFragment()
+            } else {
+                Toast.makeText(this, R.string.incorrect_phone_number_text, Toast.LENGTH_SHORT).show()
+            }
         })
     }
 

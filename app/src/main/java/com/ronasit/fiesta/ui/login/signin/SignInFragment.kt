@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import javax.inject.Inject
 import com.ronasit.fiesta.R
 import com.ronasit.fiesta.databinding.FragmentSignInBinding
@@ -31,6 +32,7 @@ class SignInFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentSignInBinding.inflate(inflater, container, false)
+        (activity as AppCompatActivity).supportActionBar!!.hide()
         binding.viewModel = viewModel.get()
         binding.lifecycleOwner = this
 
