@@ -39,14 +39,14 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
 
         signInFragment.viewModel.get().isPhoneValid().observe(this@LoginActivity, Observer {
             if (it) {
-                onMoveToConfimationFragment()
+                onMoveToConfirmationFragment()
             } else {
                 Toast.makeText(this, R.string.incorrect_phone_number_text, Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    private fun onMoveToConfimationFragment() {
+    private fun onMoveToConfirmationFragment() {
         val confirmationFragment = ConfirmationFragment.newInstance()
         val transaction = supportFragmentManager.beginTransaction()
 
