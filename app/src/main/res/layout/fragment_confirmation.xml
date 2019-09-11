@@ -58,12 +58,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/confirmation_button_shape"
             android:onClick="@{()->viewModel.onConfirmClick()}"
             android:padding="18dp"
             android:text="@string/confirm_button_text"
-            android:textAppearance="@style/TextStyle"
-            android:textColor="@android:color/white"
+            style="@style/LargeButton"
             bind:layout_constraintEnd_toEndOf="parent"
             bind:layout_constraintStart_toStartOf="parent"
             bind:layout_constraintTop_toBottomOf="@+id/code_edit" />
