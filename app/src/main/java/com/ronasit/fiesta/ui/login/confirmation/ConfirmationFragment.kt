@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.ronasit.fiesta.R
 import com.ronasit.fiesta.databinding.FragmentConfirmationBinding
 import com.ronasit.fiesta.di.ViewModelInjectionField
@@ -33,6 +34,7 @@ class ConfirmationFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentConfirmationBinding.inflate(inflater, container, false)
+        (activity as AppCompatActivity).supportActionBar!!.show()
         binding.viewModel = viewModel.get()
         binding.lifecycleOwner = this
 

@@ -21,11 +21,12 @@
             style="@style/TextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="220dp"
+            android:layout_marginTop="107dp"
             android:lineSpacingExtra="1sp"
             android:text="@string/confirmation_text"
             android:textAlignment="center"
             android:textColor="@android:color/black"
+            bind:layout_constraintBottom_toTopOf="@+id/code_edit"
             bind:layout_constraintEnd_toEndOf="parent"
             bind:layout_constraintHorizontal_bias="0.497"
             bind:layout_constraintStart_toStartOf="parent"
@@ -36,8 +37,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="107dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="18dp"
             android:background="@drawable/edit_text_shape"
             android:ems="10"
             android:hint="@string/confirmation_placeholder"
@@ -47,26 +48,26 @@
             android:text="@={viewModel.confirmationCode}"
             android:textAlignment="center"
             android:textAppearance="@style/InputHintTextAppearance"
+            bind:layout_constraintBottom_toTopOf="@+id/button"
             bind:layout_constraintEnd_toEndOf="parent"
-            bind:layout_constraintStart_toStartOf="parent"
-            bind:layout_constraintTop_toBottomOf="@+id/confirmation_text_view" />
+            bind:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/button"
+            style="@style/LargeButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="18dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="209dp"
             android:onClick="@{()->viewModel.onConfirmClick()}"
             android:padding="18dp"
             android:text="@string/confirm_button_text"
             android:textAppearance="@style/ButtonTextAppearance"
             android:textColor="@android:color/white"
-            style="@style/LargeButton"
+            bind:layout_constraintBottom_toBottomOf="parent"
             bind:layout_constraintEnd_toEndOf="parent"
-            bind:layout_constraintStart_toStartOf="parent"
-            bind:layout_constraintTop_toBottomOf="@+id/code_edit" />
+            bind:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

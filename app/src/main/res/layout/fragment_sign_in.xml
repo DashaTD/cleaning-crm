@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -8,7 +9,7 @@
             type="com.ronasit.fiesta.ui.login.signin.SignInVM" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,48 +22,51 @@
             android:layout_marginStart="127dp"
             android:layout_marginTop="87dp"
             android:layout_marginEnd="126dp"
+            android:layout_marginBottom="72dp"
+            android:background="@drawable/ic_fiesta_logo"
+            app:layout_constraintBottom_toTopOf="@+id/phone_field"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/ic_fiesta_logo" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/phone_field"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="75dp"
             android:layout_marginEnd="16dp"
 
+            android:layout_marginBottom="18dp"
             android:autofillHints="phone number"
             android:background="@drawable/edit_text_shape"
             android:hint="@string/phone_field_placeholder"
             android:inputType="phone"
             android:maxLength="17"
             android:singleLine="true"
-            android:textAlignment="center"
             android:text="@={viewModel.phoneNumber}"
 
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/continue_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logo" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/continue_button"
+            style="@style/LargeButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="18dp"
+
             android:layout_marginEnd="16dp"
 
+            android:layout_marginBottom="209dp"
             android:onClick="@{()->viewModel.onContinueClick()}"
 
             android:text="@string/continue_button_text"
-            style="@style/LargeButton"
-
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phone_field" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
