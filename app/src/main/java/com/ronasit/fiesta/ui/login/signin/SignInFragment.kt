@@ -38,5 +38,4 @@ class SignInFragment : BaseFragment() {
 
         return binding.root
     }
-
 }

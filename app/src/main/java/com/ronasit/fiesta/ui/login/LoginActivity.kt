@@ -24,11 +24,10 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
 
         with(viewModel.get()) {
-            if (isProfileCompleted()) {
-                // TODO: open new activity
-            } else {
-                onMoveToSignInFragment()
+            if (isProfileExist() && isProfileCompleted()) {
+                startAppointmentsActivity()
             }
+            onMoveToSignInFragment()
         }
     }
 
@@ -36,29 +35,38 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
         val signInFragment = SignInFragment.newInstance()
         supportFragmentManager.beginTransaction().replace(R.id.mainContainer, signInFragment)
             .commitNow()
-
+        with(viewModel.get()) {
+            if (isProfileExist()) {
+                signInFragment.viewModel.get().setPhoneNumber(getProfilePhoneNumber()!!)
+            }
+        }
         signInFragment.viewModel.get().isPhoneValid().observe(this@LoginActivity, Observer {
             if (it) {
+                val phoneNumber = signInFragment.viewModel.get().phoneNumber().value!!
+                viewModel.get().createProfile(phoneNumber)
                 onMoveToConfirmationFragment()
             } else {
-                Toast.makeText(this, R.string.incorrect_phone_number_text, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.incorrect_phone_number_text, Toast.LENGTH_SHORT)
+                    .show()
             }
         })
+    }
+
+    private fun startAppointmentsActivity() {
+        // TODO: open new activity
     }
 
     private fun onMoveToConfirmationFragment() {
         val confirmationFragment = ConfirmationFragment.newInstance()
         val transaction = supportFragmentManager.beginTransaction()
-
         transaction.replace(R.id.mainContainer, confirmationFragment)
         transaction.runOnCommit {
             confirmationFragment.viewModel.get().isCodeValid()
                 .observe(this@LoginActivity, Observer {
-                    if(it){
+                    if (it) {
                         Toast.makeText(this, "Valid code", Toast.LENGTH_SHORT).show()
                         onMoveToProfileFragment()
-                    }
-                    else {
+                    } else {
                         Toast.makeText(this, "Try again", Toast.LENGTH_SHORT).show()
                     }
                 })
@@ -72,7 +80,7 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        onMoveToSignInFragment()
     }
 
 }

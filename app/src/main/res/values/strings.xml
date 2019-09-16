@@ -5,7 +5,7 @@
     <string name="continue_button_text">Continue</string>
     <string name="incorrect_phone_number_text">Incorrect phone number!</string>
 
-    <string name="confirmation_text"> Confirmation code is sent to \n +1 293 474 6789 </string>
+    <string name="confirmation_text"> Confirmation code is sent to \n %1$s </string>
     <string name="confirmation_placeholder">Code</string>
     <string name="confirm_button_text">Confirm</string>
 </resources>
