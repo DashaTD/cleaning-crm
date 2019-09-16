@@ -8,4 +8,14 @@
     <string name="confirmation_text"> Confirmation code is sent to \n %1$s </string>
     <string name="confirmation_placeholder">Code</string>
     <string name="confirm_button_text">Confirm</string>
+    <string name="create_account">Create Account</string>
+    <string name="email_address">Email Address</string>
+    <string name="last_name">Last name</string>
+    <string name="first_name">First name</string>
+    <string name="optional">Optional</string>
+    <string name="profile_details">Profile details</string>
+    <string name="please_complete_acc">Please complete your account</string>
+    <string name="back_button">Back</string>
+    <string name="profile_is_invalid_toast">Invalid first name</string>
+    <string name="profile_is_complete_toast">Welcome</string>
 </resources>

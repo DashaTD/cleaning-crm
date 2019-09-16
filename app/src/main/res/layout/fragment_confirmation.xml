@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -34,6 +35,7 @@
 
         <EditText
             android:id="@+id/code_edit"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -45,12 +47,12 @@
             android:text="@={viewModel.confirmationCode}"
             android:textAlignment="center"
             bind:layout_constraintBottom_toTopOf="@+id/button"
-            style="@style/EditText"
             bind:layout_constraintEnd_toEndOf="parent"
             bind:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/button"
+            style="@style/LargeButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
@@ -58,11 +60,25 @@
             android:layout_marginBottom="209dp"
             android:onClick="@{()->viewModel.onConfirmClick()}"
             android:text="@string/confirm_button_text"
-            bind:layout_constraintBottom_toBottomOf="parent"
 
-            style="@style/LargeButton"
+            bind:layout_constraintBottom_toBottomOf="parent"
             bind:layout_constraintEnd_toEndOf="parent"
             bind:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/button2"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:onClick="@{()->viewModel.onBackCLick()}"
+            android:src="@drawable/back_button"
+            android:text="@string/back_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

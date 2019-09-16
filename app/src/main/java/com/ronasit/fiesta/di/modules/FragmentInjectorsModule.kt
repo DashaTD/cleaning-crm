@@ -2,6 +2,8 @@ package com.ronasit.fiesta.di.modules
 
 import com.ronasit.fiesta.ui.login.confirmation.ConfirmationFragment
 import com.ronasit.fiesta.ui.login.confirmation.ConfirmationModule
+import com.ronasit.fiesta.ui.login.profile.ProfileFragment
+import com.ronasit.fiesta.ui.login.profile.ProfileModule
 import com.ronasit.fiesta.ui.login.signin.SignInFragment
 import com.ronasit.fiesta.ui.login.signin.SignInModule
 import dagger.Module
@@ -15,4 +17,7 @@ abstract class FragmentInjectorsModule {
 
     @ContributesAndroidInjector(modules = [ConfirmationModule::class])
     abstract fun confirmationFragmentInjector(): ConfirmationFragment
+
+    @ContributesAndroidInjector(modules = [ProfileModule::class])
+    abstract fun profileFragmentInjector(): ProfileFragment
 }
