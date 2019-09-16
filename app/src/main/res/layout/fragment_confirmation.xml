@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="107dp"
             android:lineSpacingExtra="1sp"
-            android:text="@string/confirmation_text"
+            android:text="@{@string/confirmation_text(viewModel.phoneNumber)}"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             bind:layout_constraintBottom_toTopOf="@+id/code_edit"

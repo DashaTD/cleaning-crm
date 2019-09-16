@@ -22,6 +22,10 @@ class SignInVM @Inject constructor() : BaseViewModel() {
 
     fun phoneNumber(): MutableLiveData<String> = phoneNumber
 
+    fun setPhoneNumber(phoneNumber: String) {
+        this.phoneNumber.value = phoneNumber
+    }
+
     private fun validatePhone(): Boolean {
         phoneNumber.value?.let {
             return phoneRegex.matches(it)
