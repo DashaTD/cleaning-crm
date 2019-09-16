@@ -11,7 +11,7 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
     private val userService: UserService by lazy { UserService() }
 
     val phoneNumber: String? = userService.findUser()?.phoneNumber
-    val confirmationCode = MutablgiteLiveData<String>()
+    val confirmationCode = MutableLiveData<String>()
 
     lateinit var loginVM: LoginVM
 
