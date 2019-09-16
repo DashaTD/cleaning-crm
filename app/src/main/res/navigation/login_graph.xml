@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/login_graph"
+    app:startDestination="@id/signInFragment">
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.ronasit.fiesta.ui.login.signin.SignInFragment"
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/action_signInFragment_to_confirmationFragment"
+            app:destination="@id/confirmationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmationFragment"
+        android:name="com.ronasit.fiesta.ui.login.confirmation.ConfirmationFragment"
+        android:label="ConfirmationFragment" >
+        <action
+            android:id="@+id/action_confirmationFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.ronasit.fiesta.ui.login.profile.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+</navigation>

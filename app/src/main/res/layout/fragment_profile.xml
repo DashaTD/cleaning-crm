@@ -1,5 +1,162 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</RelativeLayout>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ronasit.fiesta.ui.login.profile.ProfileVM" />
+<!--        <variable-->
+<!--            name="profile"-->
+<!--            type="com.ronasit.fiesta.ui.login.profile.Profile" />-->
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lightGray"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@+id/title_label"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <Button
+            android:id="@+id/create_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/confirmation_button_shape"
+            android:onClick="@{()->viewModel.onConfirmClick()}"
+            android:text="@string/create_account"
+            android:textAppearance="@style/ButtonTextAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_edit_text" />
+
+        <EditText
+            android:id="@+id/email_edit_text"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/email_address"
+            android:inputType="textEmailAddress"
+            android:text="@={viewModel.profile.email}"
+            android:textAppearance="@style/InputHintTextAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/second_name_text" />
+
+        <EditText
+            android:id="@+id/second_name_text"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/last_name"
+            android:inputType="textPersonName"
+            android:text="@={viewModel.profile.secondName}"
+            android:textAppearance="@style/InputHintTextAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/first_name_text" />
+
+        <EditText
+            android:id="@+id/first_name_text"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/first_name"
+            android:inputType="textPersonName"
+            android:text="@={viewModel.profile.firstName}"
+            android:textAppearance="@style/InputHintTextAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            />
+
+        <TextView
+            android:id="@+id/optional_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/optional"
+            android:textAppearance="@style/SmallTextGray"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/second_name_text" />
+
+        <TextView
+            android:id="@+id/optional_label2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/optional"
+            android:textAppearance="@style/SmallTextGray"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_edit_text" />
+
+        <TextView
+            android:id="@+id/title_label"
+            style="@style/TitleTextBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/profile_details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            style="@style/TextStyle"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/please_complete_acc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_label" />
+
+        <ImageButton
+            android:id="@+id/button2"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:onClick="@{()->viewModel.onBackClick()}"
+            android:src="@drawable/back_button"
+            android:text="Back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

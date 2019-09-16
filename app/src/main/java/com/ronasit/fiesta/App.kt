@@ -10,6 +10,8 @@ import dagger.android.HasActivityInjector
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import javax.inject.Inject
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 class App : Application(), HasActivityInjector {
 
@@ -20,6 +22,7 @@ class App : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
+        Fabric.with(this, Crashlytics());
 
         Realm.init(this)
 

@@ -20,8 +20,8 @@ class InjectionViewModelProvider<VM : ViewModel> @Inject constructor(
     }
 
     fun <ACTIVITY : FragmentActivity> get(activity: ACTIVITY, viewModelClass: KClass<VM>) =
-        ViewModelProviders.of(activity, viewModelFactory).get(viewModelClass.java)
+        ViewModelProviders.of(activity, viewModelFactory).get(viewModelClass.java.simpleName, viewModelClass.java)
 
     fun <FRAGMENT : Fragment> get(fragment: FRAGMENT, viewModelClass: KClass<VM>) =
-        ViewModelProviders.of(fragment, viewModelFactory).get(viewModelClass.java)
+        ViewModelProviders.of(fragment, viewModelFactory).get(viewModelClass.java.simpleName, viewModelClass.java)
 }
