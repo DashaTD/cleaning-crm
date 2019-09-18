@@ -48,8 +48,9 @@ object NetworkModule {
                 .newBuilder()
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
-
-            //TODO: add token?
+                .addHeader(
+                    "Authorization",
+                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vZGV2LmFwaS5maWVzdGEucm9uYXNpdC5jb20vYXBpL2F1dGhvcml6ZSIsImlhdCI6MTU2ODc5ODI0MSwiZXhwIjoxNTY4ODAxODQxLCJuYmYiOjE1Njg3OTgyNDEsImp0aSI6IlZNYUE2dlBxdGUzV09MY0ciLCJzdWIiOjI5LCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.5BeiHo9qppwXB6Unp5OVFeta8AArCDp1goMzP_Gza5U")
 
             chain.proceed(builder.build())
         }

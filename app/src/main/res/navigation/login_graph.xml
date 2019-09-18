@@ -10,6 +10,9 @@
         <action
             android:id="@+id/action_signInFragment_to_confirmationFragment"
             app:destination="@id/confirmationFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/confirmationFragment"

@@ -7,6 +7,9 @@ import java.util.regex.Pattern
 
 class Profile : BaseObservable() {
 
+    private val emailPattern: Pattern =
+        Pattern.compile("^[a-zA-Z0-9.!#\$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\$")
+
     @Bindable
     var firstName = ""
         set(value) {
@@ -31,9 +34,6 @@ class Profile : BaseObservable() {
         }
         get() = field
 
-    private val pattern: Pattern =
-        Pattern.compile("^[a-zA-Z0-9.!#\$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\$")
-
     private fun validateFirstName(): Boolean {
         return firstName.isEmpty().not()
     }
@@ -43,10 +43,14 @@ class Profile : BaseObservable() {
     }
 
     private fun validateEmail(): Boolean {
-        return pattern.matcher(email.toString()).matches()
+        return emailPattern.matcher(email).matches()
     }
 
     fun isComplete(): Boolean {
         return validateFirstName()
+    }
+
+    fun isValid(): Boolean{
+        return validateFirstName() && validateSecondName() && validateEmail()
     }
 }

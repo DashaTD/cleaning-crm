@@ -23,13 +23,17 @@ class LoginVM @Inject constructor() : BaseViewModel() {
     val isCodeValid: SingleLiveEvent<Boolean> = SingleLiveEvent()
     val isProfileValid: SingleLiveEvent<Boolean> = SingleLiveEvent()
 
-    override fun onCleared() {
-        super.onCleared()
-        userService.close()
-    }
-
     fun isProfileExist(): Boolean {
         return userService.isUserExist()
+    }
+
+    fun isProfileAuthorized(): Boolean {
+        val user = userService.findUser()
+        return if (user != null) isProfileHasToken(user) else false
+    }
+
+    private fun isProfileHasToken(user: User): Boolean {
+        return user.token != null
     }
 
     fun isProfileCompleted(): Boolean {
@@ -43,7 +47,15 @@ class LoginVM @Inject constructor() : BaseViewModel() {
         userService.insertUser(user)
     }
 
+    fun updateProfile(user: User) {
+        userService.updateUser(user)
+    }
+
     fun getProfilePhoneNumber() = userService.findUser()?.phoneNumber
+
+    fun moveToScheduleFragment() {
+        // TODO: move to fragment
+    }
 
     // метод отвечающий за переход к фрагменту ConfirmationFragment
     // для перехода на новый фрагмент мы создаем определенный action,
@@ -58,9 +70,16 @@ class LoginVM @Inject constructor() : BaseViewModel() {
     // для перехода на новый фрагмент мы создаем определенный action,
     // в данном случае ConfirmationFragmentDirections.actionConfirmationFragmentToProfileFragment
     fun moveToProfileFragment() {
-        navigationController.navigate(
-            ConfirmationFragmentDirections.actionConfirmationFragmentToProfileFragment()
-        )
+        navigationController.currentDestination?.let {
+            when (it.id) {
+                R.id.signInFragment -> navigationController.navigate(
+                    SignInFragmentDirections.actionSignInFragmentToProfileFragment()
+                )
+                R.id.confirmationFragment -> navigationController.navigate(
+                    ConfirmationFragmentDirections.actionConfirmationFragmentToProfileFragment()
+                )
+            }
+        }
     }
 
     // метод отвечающий за переход к фрагменту SignInFragment из ProfileFragment
@@ -74,5 +93,10 @@ class LoginVM @Inject constructor() : BaseViewModel() {
             ProfileFragmentDirections.actionProfileFragmentToSignInFragment(),
             NavOptions.Builder().setPopUpTo(R.id.signInFragment, true).build()
         )
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        userService.close()
     }
 }

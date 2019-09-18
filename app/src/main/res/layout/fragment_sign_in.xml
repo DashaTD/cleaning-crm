@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -31,13 +31,13 @@
 
         <EditText
             android:id="@+id/phone_field"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
 
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="18dp"
-            style="@style/EditText"
             android:autofillHints="phone number"
             android:hint="@string/phone_field_placeholder"
             android:inputType="phone"
@@ -62,7 +62,6 @@
 
             android:layout_marginBottom="209dp"
             android:onClick="@{()->viewModel.onContinueClick()}"
-
             android:text="@string/continue_button_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

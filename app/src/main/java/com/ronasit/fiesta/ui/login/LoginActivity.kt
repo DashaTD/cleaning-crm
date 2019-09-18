@@ -25,23 +25,22 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
     lateinit var viewModelConfirm: ViewModelInjectionField<ProfileVM>
     override fun layoutRes() = R.layout.activity_main
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         with(viewModel.get()) {
-            if (isProfileExist() && isProfileCompleted()) {
-                startAppointments()
+            navigationController =
+                Navigation.findNavController(this@LoginActivity, R.id.navigationFragment)
+            subscribe()
+            if (isProfileCompleted()) {
+                moveToScheduleFragment()
             } else {
-                navigationController =
-                    Navigation.findNavController(this@LoginActivity, R.id.navigationFragment)
-
-                subscribe()
+                if (isProfileAuthorized()) {
+                    moveToProfileFragment()
+                }
             }
         }
-    }
-
-    private fun startAppointments() {
-        // TODO: open new activity
     }
 
     override fun onBackPressed() {

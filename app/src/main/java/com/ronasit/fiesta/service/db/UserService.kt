@@ -49,7 +49,7 @@ class UserService : IUserService {
     }
 
     override fun isUserCompleted(user: User): Boolean {
-        return user.token != null
+        return !user.firstName.isNullOrEmpty() && !user.token.isNullOrEmpty()
     }
 
     override fun close() {

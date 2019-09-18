@@ -34,10 +34,10 @@ class App : Application(), HasActivityInjector {
 
         Realm.setDefaultConfiguration(config)
 
-        // TODO: delete the following three lines if there is no need to launch app with empty db
-        val fiestaService = FiestaService()
-        fiestaService.deleteAllData()
-        fiestaService.close()
+        // TODO REMINDER: delete the following three lines if there is no need to launch app with empty db
+//        val fiestaService = FiestaService()
+//        fiestaService.deleteAllData()
+//        fiestaService.close()
 
         DaggerAppComponent
             .builder()
