@@ -3,6 +3,7 @@ package com.ronasit.fiesta.di.modules
 import com.google.gson.GsonBuilder
 import com.ronasit.fiesta.BuildConfig
 import com.ronasit.fiesta.network.FiestaApi
+import com.ronasit.fiesta.service.db.UserService
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -18,6 +19,14 @@ import java.util.concurrent.TimeUnit
 object NetworkModule {
 
     private lateinit var fiestaApi: FiestaApi
+
+    private val userService: UserService by lazy { UserService() }
+    private val authToken: String
+        get() {
+            return userService.findUser()?.let {
+                it.token
+            } ?: ""
+        }
 
     @Provides
     @Reusable
@@ -47,10 +56,7 @@ object NetworkModule {
                 .newBuilder()
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
-
-//            if (app.authToken.isNotEmpty()) {
-//                builder.addHeader("Authorization", app.authToken)
-//            }
+                .addHeader("Authorization", authToken)
 
             chain.proceed(builder.build())
         }
@@ -62,11 +68,11 @@ object NetworkModule {
                     val refreshTokenResponse = refreshTokenCall.execute()
 
                     if (refreshTokenResponse.code() == 204) {
-                        refreshTokenResponse.headers().get("Authorization")?.let { authorizationHeader ->
-//                            app.authToken = authorizationHeader
+                        refreshTokenResponse.headers().get("Authorization")?.let { authorizationToken ->
+                            userService.updateToken(authorizationToken)
 
                             return response.request.newBuilder()
-                                .addHeader("Authorization", authorizationHeader)
+                                .addHeader("Authorization", authorizationToken)
                                 .build()
                         } ?: return null
                     } else {

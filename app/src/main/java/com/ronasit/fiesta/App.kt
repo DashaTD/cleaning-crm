@@ -20,8 +20,6 @@ class App : Application(), HasActivityInjector {
     @Inject
     lateinit var activityInjector: DispatchingAndroidInjector<Activity>
 
-    var authToken: String = ""
-
     override fun onCreate() {
         super.onCreate()
         Fabric.with(this, Crashlytics());
