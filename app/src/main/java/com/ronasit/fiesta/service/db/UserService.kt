@@ -59,6 +59,9 @@ class UserService : IUserService {
     }
 
     override fun updateToken(token: String) {
-
+        findUser()?.let{
+            it.token = token
+            updateUser(it)
+        }
     }
 }
