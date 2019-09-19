@@ -21,7 +21,7 @@ open class User : RealmObject() {
             userResponse?.let {
                 user = createUser(userResponse)
             }
-            user.token = authorizeResponse.accessToken
+            user.token = "${authorizeResponse.tokenType} ${authorizeResponse.accessToken}"
 
             return user
         }
