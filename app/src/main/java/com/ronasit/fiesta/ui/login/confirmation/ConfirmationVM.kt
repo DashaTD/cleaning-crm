@@ -66,11 +66,9 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
     private fun onSucceededAuthorization(authorizeResponse: Response<AuthorizeResponse>) {
         with(loginVM) {
             isCodeValid.value = true
+            updateProfile(User.createUser(authorizeResponse.body()!!))
             when (authorizeResponse.code()) {
-                200 -> {
-                    updateProfile(User.createUser(authorizeResponse.body()!!))
-                    moveToScheduleFragment()
-                }
+                200 -> moveToScheduleFragment()
                 202 -> moveToProfileFragment()
             }
         }
