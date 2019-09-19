@@ -25,6 +25,7 @@ class SignInVM @Inject constructor() : BaseViewModel() {
 
     fun onContinueClick() {
         if (validatePhone()) {
+            showProgress.value = true
             sendCodeRequest()
         } else {
             loginVM.isPhoneValid.value = false
@@ -44,17 +45,18 @@ class SignInVM @Inject constructor() : BaseViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     loginVM.createProfile(phone)
+                    showProgress.value = false
                     loginVM.moveToConfirmationFragment()
                 },
                     {
                         onSendCodeRequestError(it)
+                        showProgress.value = false
                     })
         )
     }
 
     private fun onSendCodeRequestError(throwable: Throwable) {
         //TODO: notify user of occurred error
-
     }
 
     override fun onCleared() {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.ronasit.fiesta.R
 import com.ronasit.fiesta.databinding.FragmentProfileBinding
@@ -36,9 +37,14 @@ class ProfileFragment : BaseFragment() {
         binding.viewModel = viewModel.get()
         binding.lifecycleOwner = this
 
+        viewModel.get().showProgress.observe(this, Observer {
+            if (it) showProgress() else hideProgress()
+        })
+
         val loginVM = ViewModelProviders.of(activity!!)
             .get(LoginVM::class.java.simpleName, LoginVM::class.java)
         viewModel.get().loginVM = loginVM
+
         return binding.root
     }
 }

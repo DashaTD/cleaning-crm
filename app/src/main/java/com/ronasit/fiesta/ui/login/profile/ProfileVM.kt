@@ -1,10 +1,10 @@
 package com.ronasit.fiesta.ui.login.profile
 
-import com.ronasit.fiesta.model.User
 import com.ronasit.fiesta.network.requests.ProfileRequest
 import com.ronasit.fiesta.service.db.UserService
 import com.ronasit.fiesta.ui.base.BaseViewModel
 import com.ronasit.fiesta.ui.login.LoginVM
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -32,19 +32,16 @@ class ProfileVM @Inject constructor() : BaseViewModel() {
     }
 
     fun onConfirmClick() {
-        if (isInputValid()) {
+        if (profile.isComplete() && profile.isValid()) {
             onValidInput()
         } else {
             onInvalidInput()
         }
     }
 
-    private fun isInputValid(): Boolean {
-        return profile.isValid()
-    }
-
     private fun onValidInput() {
         loginVM.isProfileValid.value = true
+        showProgress.value = true
         sendProfileRequest()
     }
 
@@ -60,17 +57,28 @@ class ProfileVM @Inject constructor() : BaseViewModel() {
                     profile.secondName,
                     profile.email
                 )
-            ).subscribeOn(Schedulers.newThread()).subscribe({
-                if (it.code() == 401) {
-                    onAuthorizationError()
-                }
-                if (it.code() == 200) {
-                    loginVM.updateProfile(User.createUser(it.body()!!))
-                    loginVM.moveToScheduleFragment()
-                }
-            }, {
-                onProfileRequestError(it)
-            })
+            ).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    if (it.code() == 401) {
+                        showProgress.value = false
+                        onAuthorizationError()
+                    }
+                    if (it.code() == 200) {
+                        userService.findUser()?.let { user ->
+                            user.firstName = profile.secondName
+                            user.lastName = profile.secondName
+                            user.emailAddress = profile.email
+                            userService.updateUser(user)
+                        }
+                        showProgress.value = false
+                        loginVM.moveToScheduleFragment()
+                    }
+                },
+                    {
+                        onProfileRequestError(it)
+                        showProgress.value = false
+                    })
         )
     }
 

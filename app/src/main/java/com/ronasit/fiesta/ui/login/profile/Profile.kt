@@ -35,11 +35,13 @@ class Profile : BaseObservable() {
         get() = field
 
     private fun validateFirstName(): Boolean {
-        return firstName.isEmpty().not()
+        // TODO: validate somehow differently?
+        return firstName.isNotEmpty()
     }
 
     private fun validateSecondName(): Boolean {
-        return secondName.isEmpty().not()
+        // TODO: validate somehow differently?
+        return secondName.isNotEmpty()
     }
 
     private fun validateEmail(): Boolean {
@@ -47,10 +49,13 @@ class Profile : BaseObservable() {
     }
 
     fun isComplete(): Boolean {
-        return validateFirstName()
+        return firstName.isNotBlank()
     }
 
-    fun isValid(): Boolean{
-        return validateFirstName() && validateSecondName() && validateEmail()
+    fun isValid(): Boolean {
+        val isFirstNameValid = validateFirstName()
+        val isSecondNameValid = if (secondName.isNotBlank()) validateSecondName() else true
+        val isEmailValid = if (email.isNotBlank()) validateEmail() else true
+        return isFirstNameValid && isSecondNameValid && isEmailValid
     }
 }

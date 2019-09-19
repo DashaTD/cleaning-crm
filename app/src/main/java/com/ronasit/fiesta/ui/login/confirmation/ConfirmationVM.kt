@@ -12,6 +12,7 @@ import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
 import javax.inject.Inject
 
+
 class ConfirmationVM @Inject constructor() : BaseViewModel() {
 
     private val userService: UserService by lazy { UserService() }
@@ -29,6 +30,7 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
         if (!validateCode()) {
             onInvalidInput()
         } else {
+            showProgress.value = true
             sendAuthorizeRequest()
         }
     }
@@ -52,8 +54,10 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
                 )
                     .observeOn(AndroidSchedulers.mainThread()).subscribe({
                         onSucceededAuthorization(it)
+                        showProgress.value = false
                     }, {
                         onAuthorizationError(it)
+                        showProgress.value = false
                     })
             )
         }
@@ -62,10 +66,11 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
     private fun onSucceededAuthorization(authorizeResponse: Response<AuthorizeResponse>) {
         with(loginVM) {
             isCodeValid.value = true
-            updateProfile(User.createUser(authorizeResponse.body()!!))
-
             when (authorizeResponse.code()) {
-                200 -> moveToScheduleFragment()
+                200 -> {
+                    updateProfile(User.createUser(authorizeResponse.body()!!))
+                    moveToScheduleFragment()
+                }
                 202 -> moveToProfileFragment()
             }
         }
@@ -73,7 +78,6 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
 
     private fun onAuthorizationError(throwable: Throwable) {
         //TODO: notify user of occurred error
-        println("AUTHORIZATION ERROR OCCURRED ${throwable.message}")
     }
 
     fun onBackCLick() {
