@@ -1,5 +1,6 @@
 package com.ronasit.fiesta.ui.login.profile
 
+import com.ronasit.fiesta.model.User
 import com.ronasit.fiesta.network.requests.ProfileRequest
 import com.ronasit.fiesta.service.db.UserService
 import com.ronasit.fiesta.ui.base.BaseViewModel
@@ -60,20 +61,12 @@ class ProfileVM @Inject constructor() : BaseViewModel() {
             ).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    if (it.code() == 401) {
-                        showProgress.value = false
-                        onAuthorizationError()
+                    when (it.code()) {
+                        401 -> onAuthorizationError()
+                        422 -> onInvalidInput()
+                        204 -> onProfileRequestSuccess()
                     }
-                    if (it.code() == 200) {
-                        userService.findUser()?.let { user ->
-                            user.firstName = profile.secondName
-                            user.lastName = profile.secondName
-                            user.emailAddress = profile.email
-                            userService.updateUser(user)
-                        }
-                        showProgress.value = false
-                        loginVM.moveToScheduleFragment()
-                    }
+                    showProgress.value = false
                 },
                     {
                         onProfileRequestError(it)
@@ -84,6 +77,19 @@ class ProfileVM @Inject constructor() : BaseViewModel() {
 
     private fun onAuthorizationError() {
         // TODO:
+    }
+
+    private fun onProfileRequestSuccess() {
+        userService.findUser()?.let { user ->
+            val updatedUser = User()
+            updatedUser.phoneNumber = user.phoneNumber
+            updatedUser.firstName = profile.secondName
+            updatedUser.lastName = profile.secondName
+            updatedUser.emailAddress = profile.email
+            userService.updateUser(updatedUser)
+        }
+        showProgress.value = false
+        loginVM.moveToScheduleFragment()
     }
 
     private fun onProfileRequestError(throwable: Throwable) {
