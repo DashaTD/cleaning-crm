@@ -3,12 +3,12 @@ package com.ronasit.fiesta.di.modules
 import com.google.gson.GsonBuilder
 import com.ronasit.fiesta.BuildConfig
 import com.ronasit.fiesta.network.FiestaApi
+import com.ronasit.fiesta.service.db.UserService
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import io.reactivex.schedulers.Schedulers
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -18,7 +18,15 @@ import java.util.concurrent.TimeUnit
 @Module
 object NetworkModule {
 
-    lateinit var fiestaApi: FiestaApi
+    private lateinit var fiestaApi: FiestaApi
+
+    private val userService: UserService by lazy { UserService() }
+    private val authToken: String
+        get() {
+            return userService.findUser()?.let {
+                it.token
+            } ?: ""
+        }
 
     @Provides
     @Reusable
@@ -48,16 +56,39 @@ object NetworkModule {
                 .newBuilder()
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
-                .addHeader(
-                    "Authorization",
-                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vZGV2LmFwaS5maWVzdGEucm9uYXNpdC5jb20vYXBpL2F1dGhvcml6ZSIsImlhdCI6MTU2ODc5ODI0MSwiZXhwIjoxNTY4ODAxODQxLCJuYmYiOjE1Njg3OTgyNDEsImp0aSI6IlZNYUE2dlBxdGUzV09MY0ciLCJzdWIiOjI5LCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.5BeiHo9qppwXB6Unp5OVFeta8AArCDp1goMzP_Gza5U")
+                .addHeader("Authorization", authToken)
 
             chain.proceed(builder.build())
+        }
+
+        val authenticator = object : Authenticator {
+            override fun authenticate(route: Route?, response: Response): Request? {
+                if (response.code == 401) {
+                    val refreshTokenCall = fiestaApi.refreshToken()
+                    val refreshTokenResponse = refreshTokenCall.execute()
+
+                    if (refreshTokenResponse.code() == 204) {
+                        refreshTokenResponse.headers().get("Authorization")?.let { authorizationToken ->
+                            userService.updateToken(authorizationToken)
+
+                            return response.request.newBuilder()
+                                .addHeader("Authorization", authorizationToken)
+                                .build()
+                        } ?: return null
+                    } else {
+                        return null
+                    }
+                } else {
+                    return null
+                }
+            }
+
         }
 
         val client = OkHttpClient.Builder()
             .addInterceptor(logsInterceptor)
             .addInterceptor(headerInterceptor)
+            .authenticator(authenticator)
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .build()

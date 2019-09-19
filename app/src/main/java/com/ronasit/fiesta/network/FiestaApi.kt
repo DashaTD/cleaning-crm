@@ -7,6 +7,7 @@ import com.ronasit.fiesta.network.responses.AuthorizeResponse
 import com.ronasit.fiesta.network.responses.UserResponse
 import io.reactivex.Completable
 import io.reactivex.Single
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -22,4 +23,7 @@ interface FiestaApi {
 
     @PUT("/api/profile")
     fun createProfile(@Body request: ProfileRequest): Single<Response<UserResponse>>
+
+    @POST("/api/refresh")
+    fun refreshToken(): Call<Void>
 }
