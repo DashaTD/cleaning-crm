@@ -10,40 +10,12 @@ import javax.inject.Inject
 
 class SignInVM @Inject constructor() : BaseViewModel() {
 
-    private val phoneNumber = MutableLiveData<String>()
-
     lateinit var loginVM: LoginVM
+
+    private val phoneNumber = MutableLiveData<String>()
 
     private val phoneRegex =
         "(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\\s*[)]?[-\\s\\.]?[(]?[0-9]{1,3}[)]?([-\\s\\.]?[0-9]{3})([-\\s\\.]?[0-9]{3,4})".toRegex()
-
-    fun onContinueClick() {
-        with(loginVM) {
-            if (validatePhone()) {
-                val phone = phoneNumber.value!!
-
-                compositeDisposable.add(
-                    fiestaApi.getCode(GetCodeRequest(phone)).subscribeOn(Schedulers.newThread())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({
-                            loginVM.createProfile(phone)
-
-                            moveToConfirmationFragment()
-                        },
-                            {
-                                isPhoneValid.value = false
-                            })
-                )
-            } else {
-                isPhoneValid.value = false
-            }
-        }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.clear()
-    }
 
     fun phoneNumber(): MutableLiveData<String> = phoneNumber
 
@@ -51,9 +23,45 @@ class SignInVM @Inject constructor() : BaseViewModel() {
         this.phoneNumber.value = phoneNumber
     }
 
+    fun onContinueClick() {
+        if (validatePhone()) {
+            showProgress.value = true
+            sendCodeRequest()
+        } else {
+            loginVM.isPhoneValid.value = false
+        }
+    }
+
     private fun validatePhone(): Boolean {
         phoneNumber.value?.let {
             return phoneRegex.matches(it)
         } ?: return false
     }
+
+    private fun sendCodeRequest() {
+        val phone = phoneNumber.value!!
+        compositeDisposable.add(
+            fiestaApi.sendCode(GetCodeRequest(phone)).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    loginVM.createProfile(phone)
+                    showProgress.value = false
+                    loginVM.moveToConfirmationFragment()
+                },
+                    {
+                        onSendCodeRequestError(it)
+                        showProgress.value = false
+                    })
+        )
+    }
+
+    private fun onSendCodeRequestError(throwable: Throwable) {
+        //TODO: notify user of occurred error
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
+    }
+
 }

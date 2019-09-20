@@ -11,6 +11,8 @@ interface IUserService: IService {
     fun deleteUser()
     fun isUserExist(): Boolean
     fun isUserCompleted(user: User): Boolean
+
+    fun updateToken(token: String)
 }
 
 class UserService : IUserService {
@@ -49,10 +51,17 @@ class UserService : IUserService {
     }
 
     override fun isUserCompleted(user: User): Boolean {
-        return user.token != null
+        return !user.firstName.isNullOrEmpty() && !user.token.isNullOrEmpty()
     }
 
     override fun close() {
         realm.close()
+    }
+
+    override fun updateToken(token: String) {
+        findUser()?.let{
+            it.token = token
+            updateUser(it)
+        }
     }
 }

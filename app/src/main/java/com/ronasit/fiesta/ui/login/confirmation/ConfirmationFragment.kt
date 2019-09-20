@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.ronasit.fiesta.R
 import com.ronasit.fiesta.databinding.FragmentConfirmationBinding
@@ -34,11 +34,15 @@ class ConfirmationFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentConfirmationBinding.inflate(inflater, container, false)
-//        (activity as AppCompatActivity).supportActionBar!!.show()
         binding.viewModel = viewModel.get()
         binding.lifecycleOwner = this
 
-        val loginVM = ViewModelProviders.of(activity!!).get(LoginVM::class.java.simpleName, LoginVM::class.java)
+        viewModel.get().showProgress.observe(this, Observer {
+            if (it) showProgress() else hideProgress()
+        })
+
+        val loginVM = ViewModelProviders.of(activity!!)
+            .get(LoginVM::class.java.simpleName, LoginVM::class.java)
         viewModel.get().loginVM = loginVM
 
         return binding.root

@@ -7,6 +7,9 @@ import java.util.regex.Pattern
 
 class Profile : BaseObservable() {
 
+    private val emailPattern: Pattern =
+        Pattern.compile("^[a-zA-Z0-9.!#\$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\$")
+
     @Bindable
     var firstName = ""
         set(value) {
@@ -31,22 +34,28 @@ class Profile : BaseObservable() {
         }
         get() = field
 
-    private val pattern: Pattern =
-        Pattern.compile("^[a-zA-Z0-9.!#\$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\$")
-
     private fun validateFirstName(): Boolean {
-        return firstName.isEmpty().not()
+        // TODO: validate somehow differently?
+        return firstName.isNotEmpty()
     }
 
     private fun validateSecondName(): Boolean {
-        return secondName.isEmpty().not()
+        // TODO: validate somehow differently?
+        return secondName.isNotEmpty()
     }
 
     private fun validateEmail(): Boolean {
-        return pattern.matcher(email.toString()).matches()
+        return emailPattern.matcher(email).matches()
     }
 
     fun isComplete(): Boolean {
-        return validateFirstName()
+        return firstName.isNotBlank()
+    }
+
+    fun isValid(): Boolean {
+        val isFirstNameValid = validateFirstName()
+        val isSecondNameValid = if (secondName.isNotBlank()) validateSecondName() else true
+        val isEmailValid = if (email.isNotBlank()) validateEmail() else true
+        return isFirstNameValid && isSecondNameValid && isEmailValid
     }
 }

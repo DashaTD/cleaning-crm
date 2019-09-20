@@ -25,23 +25,18 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
     lateinit var viewModelConfirm: ViewModelInjectionField<ProfileVM>
     override fun layoutRes() = R.layout.activity_main
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         with(viewModel.get()) {
-            if (isProfileExist() && isProfileCompleted()) {
-                startAppointments()
-            } else {
-                navigationController =
-                    Navigation.findNavController(this@LoginActivity, R.id.navigationFragment)
-
-                subscribe()
+            navigationController =
+                Navigation.findNavController(this@LoginActivity, R.id.navigationFragment)
+            subscribe()
+            if (isProfileCompleted()) {
+                moveToScheduleFragment()
             }
         }
-    }
-
-    private fun startAppointments() {
-        // TODO: open new activity
     }
 
     override fun onBackPressed() {
@@ -113,5 +108,4 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
         }
 
     }
-
 }
