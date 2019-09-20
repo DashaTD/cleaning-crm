@@ -1,11 +1,9 @@
 package com.ronasit.fiesta.ui.login.signin
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
@@ -16,8 +14,8 @@ import com.ronasit.fiesta.di.ViewModelInjectionField
 import com.ronasit.fiesta.di.qualifiers.ViewModelInjection
 import com.ronasit.fiesta.ui.base.BaseFragment
 import com.ronasit.fiesta.ui.login.LoginVM
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_sign_in.*
+import javax.inject.Inject
 
 class SignInFragment : BaseFragment() {
 
