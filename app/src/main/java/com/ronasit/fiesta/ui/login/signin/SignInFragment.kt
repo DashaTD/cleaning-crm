@@ -1,7 +1,11 @@
 package com.ronasit.fiesta.ui.login.signin
 
+import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
@@ -12,7 +16,8 @@ import com.ronasit.fiesta.di.ViewModelInjectionField
 import com.ronasit.fiesta.di.qualifiers.ViewModelInjection
 import com.ronasit.fiesta.ui.base.BaseFragment
 import com.ronasit.fiesta.ui.login.LoginVM
-import javax.inject.Inject
+import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 class SignInFragment : BaseFragment() {
 
@@ -48,6 +53,29 @@ class SignInFragment : BaseFragment() {
         if (loginVM.isProfileExist()) {
             viewModel.get().setPhoneNumber(loginVM.getProfilePhoneNumber()!!)
         }
+
+        binding.phoneField.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                //phone_field.setBackgroundResource(R.drawable.rounded_normal_border_edittext)
+            } else {
+                phone_field.setBackgroundResource(R.drawable.rounded_normal_unfocused_eddittext)
+            }
+        }
+        binding.phoneField.addTextChangedListener( object : TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+                error_phone_hint_text.visibility = View.INVISIBLE
+                phone_field.setBackgroundResource(R.drawable.rounded_normal_border_edittext)
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+        })
 
         return binding.root
     }

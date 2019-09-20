@@ -16,7 +16,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:focusable="false"
+        android:focusableInTouchMode="true">
 
         <View
             android:id="@+id/view"
@@ -37,6 +39,7 @@
             android:background="@drawable/confirmation_button_shape"
             android:onClick="@{()->viewModel.onConfirmClick()}"
             android:text="@string/create_account"
+            android:stateListAnimator="@animator/scale_button_anim"
             android:textAppearance="@style/ButtonTextAppearance"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -45,13 +48,15 @@
 
         <EditText
             android:id="@+id/email_edit_text"
-            style="@style/EditText"
+
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="16dp"
             android:hint="@string/email_address"
+            style="@style/EditText"
+            android:background="@drawable/rounded_normal_unfocused_eddittext"
             android:inputType="textEmailAddress"
             android:text="@={viewModel.profile.email}"
             android:textAppearance="@style/InputHintTextAppearance"
@@ -68,6 +73,10 @@
             android:layout_marginTop="18dp"
             android:layout_marginEnd="16dp"
             android:hint="@string/last_name"
+
+            android:background="@drawable/rounded_normal_unfocused_eddittext"
+            android:focusable="true"
+            android:focusedByDefault="false"
             android:inputType="textPersonName"
             android:text="@={viewModel.profile.secondName}"
             android:textAppearance="@style/InputHintTextAppearance"
@@ -85,6 +94,8 @@
             android:layout_marginTop="14dp"
             android:layout_marginEnd="16dp"
             android:hint="@string/first_name"
+            android:focusedByDefault="false"
+            android:background="@drawable/rounded_normal_unfocused_eddittext"
             android:inputType="textPersonName"
             android:text="@={viewModel.profile.firstName}"
             android:textAppearance="@style/InputHintTextAppearance"
@@ -113,7 +124,6 @@
             android:layout_marginTop="6dp"
             android:text="@string/optional"
             android:textAppearance="@style/SmallTextGray"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/email_edit_text" />
@@ -154,9 +164,19 @@
             android:background="@null"
             android:onClick="@{()->viewModel.onBackClick()}"
             android:src="@drawable/back_button"
-            android:text="Back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/error_firstName_hint_text"
+            style="@style/SmallTextPink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:text="@string/error_message_small"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/first_name_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
