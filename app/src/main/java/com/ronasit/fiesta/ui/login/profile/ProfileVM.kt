@@ -76,7 +76,7 @@ class ProfileVM @Inject constructor() : BaseViewModel() {
     }
 
     private fun onAuthorizationError() {
-        // TODO:
+        userService.updateToken("")
     }
 
     private fun onProfileRequestSuccess() {
