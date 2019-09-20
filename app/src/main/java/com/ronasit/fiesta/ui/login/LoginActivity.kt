@@ -35,10 +35,6 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
             subscribe()
             if (isProfileCompleted()) {
                 moveToScheduleFragment()
-            } else {
-                if (isProfileAuthorized()) {
-                    moveToProfileFragment()
-                }
             }
         }
     }
