@@ -20,13 +20,7 @@ object NetworkModule {
 
     private lateinit var fiestaApi: FiestaApi
 
-    private val userService: UserService by lazy { UserService() }
-    private val authToken: String
-        get() {
-            return userService.findUser()?.let {
-                it.token
-            } ?: ""
-        }
+    var authToken: String = ""
 
     @Provides
     @Reusable
@@ -56,7 +50,10 @@ object NetworkModule {
                 .newBuilder()
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
-                .addHeader("Authorization", authToken)
+
+            if (authToken.isNotEmpty()) {
+                builder.addHeader("Authorization", authToken)
+            }
 
             chain.proceed(builder.build())
         }
@@ -69,7 +66,6 @@ object NetworkModule {
 
                     if (refreshTokenResponse.code() == 204) {
                         refreshTokenResponse.headers().get("Authorization")?.let { authorizationToken ->
-                            userService.updateToken(authorizationToken)
 
                             return response.request.newBuilder()
                                 .addHeader("Authorization", authorizationToken)

@@ -1,6 +1,7 @@
 package com.ronasit.fiesta.ui.login.confirmation
 
 import androidx.lifecycle.MutableLiveData
+import com.ronasit.fiesta.di.modules.NetworkModule
 import com.ronasit.fiesta.model.User
 import com.ronasit.fiesta.network.requests.AuthorizeRequest
 import com.ronasit.fiesta.network.responses.AuthorizeResponse
@@ -64,12 +65,15 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
     }
 
     private fun onSucceededAuthorization(authorizeResponse: Response<AuthorizeResponse>) {
-        with(loginVM) {
-            isCodeValid.value = true
-            updateProfile(User.createUser(authorizeResponse.body()!!))
+        authorizeResponse.body()?.let { authResponse ->
+            loginVM.isCodeValid.value = true
+            loginVM.updateProfile(User.createUser(authResponse))
+
+            NetworkModule.authToken = "$authResponse.tokenType} ${authResponse.accessToken}"
+
             when (authorizeResponse.code()) {
-                200 -> moveToScheduleFragment()
-                202 -> moveToProfileFragment()
+                200 -> loginVM.moveToScheduleFragment()
+                202 -> loginVM.moveToProfileFragment()
             }
         }
     }
