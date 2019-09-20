@@ -69,7 +69,7 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
             loginVM.isCodeValid.value = true
             loginVM.updateProfile(User.createUser(authResponse))
 
-            NetworkModule.authToken = "$authResponse.tokenType} ${authResponse.accessToken}"
+            NetworkModule.authToken = "${authResponse.tokenType} ${authResponse.accessToken}"
 
             when (authorizeResponse.code()) {
                 200 -> loginVM.moveToScheduleFragment()
