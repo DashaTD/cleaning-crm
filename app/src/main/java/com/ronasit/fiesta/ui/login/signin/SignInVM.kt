@@ -7,6 +7,12 @@ import com.ronasit.fiesta.ui.login.LoginVM
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+import android.R
+import android.view.animation.AnimationUtils.loadAnimation
+import android.view.animation.Animation
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.view.animation.AnimationUtils
+
 
 class SignInVM @Inject constructor() : BaseViewModel() {
 

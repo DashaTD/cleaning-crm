@@ -59,7 +59,7 @@
             android:layout_marginBottom="209dp"
             android:onClick="@{()->viewModel.onConfirmClick()}"
             android:text="@string/confirm_button_text"
-
+            android:stateListAnimator="@animator/scale_button_anim"
             bind:layout_constraintBottom_toBottomOf="parent"
             bind:layout_constraintEnd_toEndOf="parent"
             bind:layout_constraintStart_toStartOf="parent" />
@@ -69,14 +69,26 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="6dp"
+            android:padding="6dp"
+            android:layout_marginTop="14dp"
             android:background="@null"
             android:onClick="@{()->viewModel.onBackCLick()}"
             android:src="@drawable/back_button"
             android:text="@string/back_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/error_code_hint_text"
+            style="@style/SmallTextPink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:text="@string/error_message_small"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/code_edit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
