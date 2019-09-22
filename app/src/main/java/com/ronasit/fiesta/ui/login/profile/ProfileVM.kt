@@ -1,6 +1,5 @@
 package com.ronasit.fiesta.ui.login.profile
 
-import com.ronasit.fiesta.model.User
 import com.ronasit.fiesta.network.requests.ProfileRequest
 import com.ronasit.fiesta.service.db.UserService
 import com.ronasit.fiesta.ui.base.BaseViewModel
