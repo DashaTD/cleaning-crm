@@ -2,12 +2,14 @@ package com.ronasit.fiesta.service.db
 
 import com.ronasit.fiesta.model.User
 import com.ronasit.fiesta.service.IService
+import com.ronasit.fiesta.ui.login.profile.Profile
 import io.realm.Realm
 
-interface IUserService: IService {
+interface IUserService : IService {
     fun findUser(): User?
     fun insertUser(user: User): User
     fun updateUser(user: User)
+    fun updateUser(profile: Profile)
     fun deleteUser()
     fun isUserExist(): Boolean
     fun isUserCompleted(user: User): Boolean
@@ -39,6 +41,20 @@ class UserService : IUserService {
         realm.commitTransaction()
     }
 
+    override fun updateUser(profile: Profile) {
+        val updatedUser = User()
+        findUser()?.let { user ->
+            updatedUser.phoneNumber = user.phoneNumber
+            updatedUser.firstName = profile.secondName
+            updatedUser.lastName = profile.secondName
+            updatedUser.emailAddress = profile.email
+            updatedUser.token = user.token
+        }
+        realm.beginTransaction()
+        realm.copyToRealmOrUpdate(updatedUser)
+        realm.commitTransaction()
+    }
+
     override fun deleteUser() {
         val realmUser = findUser()
         realm.beginTransaction()
@@ -59,7 +75,7 @@ class UserService : IUserService {
     }
 
     override fun updateToken(token: String) {
-        findUser()?.let{
+        findUser()?.let {
             it.token = token
             updateUser(it)
         }

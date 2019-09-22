@@ -80,14 +80,7 @@ class ProfileVM @Inject constructor() : BaseViewModel() {
     }
 
     private fun onProfileRequestSuccess() {
-        userService.findUser()?.let { user ->
-            val updatedUser = User()
-            updatedUser.phoneNumber = user.phoneNumber
-            updatedUser.firstName = profile.secondName
-            updatedUser.lastName = profile.secondName
-            updatedUser.emailAddress = profile.email
-            userService.updateUser(updatedUser)
-        }
+        userService.updateUser(profile)
         showProgress.value = false
         loginVM.moveToScheduleFragment()
     }
