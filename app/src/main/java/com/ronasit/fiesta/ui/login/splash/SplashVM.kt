@@ -1,6 +1,7 @@
 package com.ronasit.fiesta.ui.login.splash
 
 import android.os.Handler
+import com.ronasit.fiesta.di.modules.NetworkModule
 import com.ronasit.fiesta.service.db.UserService
 import com.ronasit.fiesta.ui.base.BaseViewModel
 import com.ronasit.fiesta.ui.login.LoginVM
@@ -17,7 +18,9 @@ class SplashVM @Inject constructor() : BaseViewModel() {
     init {
         Handler().postDelayed({
             if (isProfileCompleted()) {
+
                 loginVM.moveToScheduleFragment()
+                userService.findUser()?.token?.let { NetworkModule.authToken = it }
             } else {
                 loginVM.moveToSignInFragment()
             }
