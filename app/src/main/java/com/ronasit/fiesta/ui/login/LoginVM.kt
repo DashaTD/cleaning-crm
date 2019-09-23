@@ -1,15 +1,14 @@
 package com.ronasit.fiesta.ui.login
 
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import com.ronasit.fiesta.R
 import com.ronasit.fiesta.base.SingleLiveEvent
-import com.ronasit.fiesta.model.User
 import com.ronasit.fiesta.service.db.UserService
 import com.ronasit.fiesta.ui.base.BaseViewModel
 import com.ronasit.fiesta.ui.login.confirmation.ConfirmationFragmentDirections
 import com.ronasit.fiesta.ui.login.profile.ProfileFragmentDirections
 import com.ronasit.fiesta.ui.login.signin.SignInFragmentDirections
+import com.ronasit.fiesta.ui.login.splash.SplashFragmentDirections
 import javax.inject.Inject
 
 class LoginVM @Inject constructor() : BaseViewModel() {
@@ -23,38 +22,18 @@ class LoginVM @Inject constructor() : BaseViewModel() {
     val isCodeValid: SingleLiveEvent<Boolean> = SingleLiveEvent()
     val isProfileValid: SingleLiveEvent<Boolean> = SingleLiveEvent()
 
-    fun isProfileExist(): Boolean {
-        return userService.isUserExist()
-    }
-
-    fun isProfileAuthorized(): Boolean {
-        val user = userService.findUser()
-        return if (user != null) isProfileHasToken(user) else false
-    }
-
-    private fun isProfileHasToken(user: User): Boolean {
-        return user.token != null
-    }
-
-    fun isProfileCompleted(): Boolean {
-        val user = userService.findUser()
-        return if (user != null) userService.isUserCompleted(user) else false
-    }
-
-    fun createProfile(phoneNumber: String) {
-        val user = User()
-        user.phoneNumber = phoneNumber
-        userService.insertUser(user)
-    }
-
-    fun updateProfile(user: User) {
-        userService.updateUser(user)
-    }
-
-    fun getProfilePhoneNumber() = userService.findUser()?.phoneNumber
-
-    fun moveToScheduleFragment() {
-        // TODO: move to fragment
+    fun moveToSignInFragment() {
+        navigationController.currentDestination?.let {
+            when (it.id) {
+                R.id.splashFragment ->
+                    navigationController.navigate(
+                        SplashFragmentDirections.actionSplashFragmentToSignInFragment()
+                    )
+                R.id.profileFragment -> navigationController.navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToSignInFragment()
+                )
+            }
+        }
     }
 
     // метод отвечающий за переход к фрагменту ConfirmationFragment
@@ -70,29 +49,25 @@ class LoginVM @Inject constructor() : BaseViewModel() {
     // для перехода на новый фрагмент мы создаем определенный action,
     // в данном случае ConfirmationFragmentDirections.actionConfirmationFragmentToProfileFragment
     fun moveToProfileFragment() {
+        navigationController.navigate(
+            ConfirmationFragmentDirections.actionConfirmationFragmentToProfileFragment()
+        )
+    }
+
+    fun moveToScheduleFragment() {
         navigationController.currentDestination?.let {
             when (it.id) {
-                R.id.signInFragment -> navigationController.navigate(
-                    SignInFragmentDirections.actionSignInFragmentToProfileFragment()
+                R.id.splashFragment -> navigationController.navigate(
+                    SplashFragmentDirections.actionSplashFragmentToScheduleFragment()
                 )
                 R.id.confirmationFragment -> navigationController.navigate(
-                    ConfirmationFragmentDirections.actionConfirmationFragmentToProfileFragment()
+                    ConfirmationFragmentDirections.actionConfirmationFragmentToScheduleFragment()
+                )
+                R.id.profileFragment -> navigationController.navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToScheduleFragment()
                 )
             }
         }
-    }
-
-    // метод отвечающий за переход к фрагменту SignInFragment из ProfileFragment
-    // для перехода на новый фрагмент мы создаем определенный action,
-    // в данном случае ProfileFragmentDirections.actionProfileFragmentToSignInFragment
-    // NavOptions.Builder().setPopUpTo(R.id.signInFragment, true).build() - отвечает за то, чтобы
-    // переход из профиля на signin не был добавлен в backstack. это обеспечивает выход из приложения
-    // когда мы на экране signin
-    fun backToSignInFragment() {
-        navigationController.navigate(
-            ProfileFragmentDirections.actionProfileFragmentToSignInFragment(),
-            NavOptions.Builder().setPopUpTo(R.id.signInFragment, true).build()
-        )
     }
 
     override fun onCleared() {

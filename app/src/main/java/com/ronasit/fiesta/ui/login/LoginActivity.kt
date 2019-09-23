@@ -34,9 +34,6 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
             navigationController =
                 Navigation.findNavController(this@LoginActivity, R.id.navigationFragment)
             subscribe()
-            if (isProfileCompleted()) {
-                moveToScheduleFragment()
-            }
         }
     }
 
@@ -45,7 +42,7 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
             navigationController.currentDestination?.let {
                 when (it.id) {
                     R.id.confirmationFragment -> navigationController.popBackStack()
-                    R.id.profileFragment -> backToSignInFragment()
+                    R.id.profileFragment -> moveToSignInFragment()
                     else -> super.onBackPressed()
                 }
             } ?: super.onBackPressed()
