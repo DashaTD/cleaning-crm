@@ -48,10 +48,6 @@ class SignInFragment : BaseFragment() {
             if (it) showProgress() else hideProgress()
         })
 
-        if (loginVM.isProfileExist()) {
-            viewModel.get().setPhoneNumber(loginVM.getProfilePhoneNumber()!!)
-        }
-
         binding.phoneField.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 //phone_field.setBackgroundResource(R.drawable.rounded_normal_border_edittext)

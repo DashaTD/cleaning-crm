@@ -67,7 +67,7 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
     private fun onSucceededAuthorization(authorizeResponse: Response<AuthorizeResponse>) {
         authorizeResponse.body()?.let { authResponse ->
             loginVM.isCodeValid.value = true
-            loginVM.updateProfile(User.createUser(authResponse))
+            updateProfile(User.createUser(authResponse))
 
             NetworkModule.authToken = "${authResponse.tokenType} ${authResponse.accessToken}"
 
@@ -76,6 +76,10 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
                 202 -> loginVM.moveToProfileFragment()
             }
         }
+    }
+
+    private fun updateProfile(user: User) {
+        userService.updateUser(user)
     }
 
     private fun onAuthorizationError(throwable: Throwable) {

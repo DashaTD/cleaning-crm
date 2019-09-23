@@ -90,7 +90,7 @@ class ProfileVM @Inject constructor() : BaseViewModel() {
     }
 
     fun onBackClick() {
-        loginVM.backToSignInFragment()
+        loginVM.moveToSignInFragment()
     }
 
     override fun onCleared() {
