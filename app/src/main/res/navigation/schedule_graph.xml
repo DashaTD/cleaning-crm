@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/mobile_navigation.xml"
+    app:startDestination="@id/appointmentsFragment">
+
+    <fragment
+        android:id="@+id/appointmentsFragment"
+        android:name="com.ronasit.fiesta.ui.schedule.appointments.AppointmentsFragment"
+        android:label="AppointmentsFragment" />
+    <fragment
+        android:id="@+id/clientsFragment"
+        android:name="com.ronasit.fiesta.ui.schedule.clients.ClientsFragment"
+        android:label="ClientsFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.ronasit.fiesta.ui.schedule.settings.SettingsFragment"
+        android:label="SettingsFragment" />
+</navigation>

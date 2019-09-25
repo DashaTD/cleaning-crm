@@ -25,6 +25,7 @@ class ProfileVM @Inject constructor() : BaseViewModel() {
         if (!user?.lastName.isNullOrBlank()) {
             profile.secondName = user?.lastName.toString()
         }
+
         if (!user?.emailAddress.isNullOrEmpty()) {
             profile.email = user?.emailAddress.toString()
         }
@@ -46,6 +47,7 @@ class ProfileVM @Inject constructor() : BaseViewModel() {
     }
 
     private fun onInvalidInput() {
+        loginVM.isProfileValid.value = false
         // TODO: notify user somehow
     }
 
@@ -81,7 +83,7 @@ class ProfileVM @Inject constructor() : BaseViewModel() {
     private fun onProfileRequestSuccess() {
         userService.updateUser(profile)
         showProgress.value = false
-        loginVM.moveToScheduleFragment()
+        loginVM.moveToScheduleActivity()
     }
 
     private fun onProfileRequestError(throwable: Throwable) {

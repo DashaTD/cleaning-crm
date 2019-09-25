@@ -19,7 +19,7 @@ class SplashVM @Inject constructor() : BaseViewModel() {
         Handler().postDelayed({
             if (isProfileCompleted()) {
 
-                loginVM.moveToScheduleFragment()
+                loginVM.moveToScheduleActivity()
                 userService.findUser()?.token?.let { NetworkModule.authToken = it }
             } else {
                 loginVM.moveToSignInFragment()

@@ -54,17 +54,17 @@ class LoginVM @Inject constructor() : BaseViewModel() {
         )
     }
 
-    fun moveToScheduleFragment() {
+    fun moveToScheduleActivity() {
         navigationController.currentDestination?.let {
             when (it.id) {
                 R.id.splashFragment -> navigationController.navigate(
-                    SplashFragmentDirections.actionSplashFragmentToScheduleFragment()
+                    SplashFragmentDirections.actionSplashFragmentToScheduleActivity()
                 )
                 R.id.confirmationFragment -> navigationController.navigate(
-                    ConfirmationFragmentDirections.actionConfirmationFragmentToScheduleFragment()
+                    ConfirmationFragmentDirections.actionConfirmationFragmentToScheduleActivity()
                 )
                 R.id.profileFragment -> navigationController.navigate(
-                    ProfileFragmentDirections.actionProfileFragmentToScheduleFragment()
+                    ProfileFragmentDirections.actionProfileFragmentToScheduleActivity()
                 )
             }
         }
