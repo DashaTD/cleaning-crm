@@ -11,7 +11,7 @@ class ScheduleModule {
     @Provides
     @ViewModelInjection
     fun provideScheduleVM(
-        fragment: ScheduleFragment,
-        viewModelProvider: InjectionViewModelProvider<ScheduleVM>
-    ) = viewModelProvider.get(fragment, ScheduleVM::class)
+        activity: com.ronasit.fiesta.ui.schedule.ScheduleActivity,
+        viewModelProvider: InjectionViewModelProvider<com.ronasit.fiesta.ui.schedule.ScheduleVM>
+    ) = viewModelProvider.get(activity, com.ronasit.fiesta.ui.schedule.ScheduleVM::class)
 }

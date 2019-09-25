@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/login_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_graph"
     app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.ronasit.fiesta.ui.login.splash.SplashFragment"
-        android:label="SplashFragment" >
+        android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_signInFragment"
             app:destination="@id/signInFragment"
@@ -17,19 +18,15 @@
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_splashFragment_to_scheduleFragment"
-            app:destination="@id/scheduleFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            android:id="@+id/action_splashFragment_to_scheduleActivity"
+            app:destination="@id/scheduleActivity"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.ronasit.fiesta.ui.login.signin.SignInFragment"
-        android:label="SignInFragment" >
+        android:label="SignInFragment">
         <action
             android:id="@+id/action_signInFragment_to_confirmationFragment"
             app:destination="@id/confirmationFragment" />
@@ -37,33 +34,34 @@
     <fragment
         android:id="@+id/confirmationFragment"
         android:name="com.ronasit.fiesta.ui.login.confirmation.ConfirmationFragment"
-        android:label="ConfirmationFragment" >
+        android:label="ConfirmationFragment">
         <action
             android:id="@+id/action_confirmationFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_confirmationFragment_to_scheduleFragment"
-            app:destination="@id/scheduleFragment"
+            android:id="@+id/action_confirmationFragment_to_scheduleActivity"
+            app:destination="@id/scheduleActivity"
             app:popUpTo="@id/login_graph"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
+
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.ronasit.fiesta.ui.login.profile.ProfileFragment"
-        android:label="ProfileFragment" >
+        android:label="ProfileFragment">
         <action
             android:id="@+id/action_profileFragment_to_signInFragment"
             app:destination="@id/signInFragment"
             app:popUpTo="@id/signInFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_profileFragment_to_scheduleFragment"
-            app:destination="@id/scheduleFragment"
+            android:id="@+id/action_profileFragment_to_scheduleActivity"
+            app:destination="@id/scheduleActivity"
             app:popUpTo="@id/login_graph"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
-    <fragment
-        android:id="@+id/scheduleFragment"
-        android:name="com.ronasit.fiesta.ui.schedule.ScheduleFragment"
-        android:label="ScheduleFragment" />
+    <activity
+        android:id="@+id/scheduleActivity"
+        android:name="com.ronasit.fiesta.ui.schedule.ScheduleActivity"
+        android:label="ScheduleActivity" />
 </navigation>

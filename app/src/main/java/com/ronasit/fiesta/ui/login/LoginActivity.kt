@@ -3,7 +3,6 @@ package com.ronasit.fiesta.ui.login
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -56,13 +55,6 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
         with(viewModel.get()) {
             isPhoneValid.observe(this@LoginActivity, Observer {
                 if (!it) {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        R.string.incorrect_phone_number_text,
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-
                     error_phone_hint_text.visibility = View.VISIBLE
                     phone_field.setBackgroundResource(R.drawable.rounded_error_border_edittext)
                 } else {
@@ -73,12 +65,6 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
 
             isCodeValid.observe(this@LoginActivity, Observer {
                 if (!it) {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        R.string.incorrect_phone_number_text,
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
                     error_code_hint_text.visibility = View.VISIBLE
                     code_edit.setBackgroundResource(R.drawable.rounded_error_border_edittext)
                 } else {
@@ -91,20 +77,9 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
 
             isProfileValid.observe(this@LoginActivity, Observer {
                 if (it) {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        R.string.profile_is_complete_toast,
-                        Toast.LENGTH_SHORT
-                    ).show()
                     error_firstName_hint_text.visibility = View.INVISIBLE
                     first_name_text.setBackgroundResource(R.drawable.rounded_normal_border_edittext)
                 } else {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        R.string.profile_is_invalid_toast,
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
                     error_firstName_hint_text.visibility = View.VISIBLE
                     first_name_text.setBackgroundResource(R.drawable.rounded_error_border_edittext)
                 }

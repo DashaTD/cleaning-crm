@@ -72,7 +72,7 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
             NetworkModule.authToken = "${authResponse.tokenType} ${authResponse.accessToken}"
 
             when (authorizeResponse.code()) {
-                200 -> loginVM.moveToScheduleFragment()
+                200 -> loginVM.moveToScheduleActivity()
                 202 -> loginVM.moveToProfileFragment()
             }
         }

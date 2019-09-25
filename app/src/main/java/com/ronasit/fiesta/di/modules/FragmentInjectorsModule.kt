@@ -8,8 +8,12 @@ import com.ronasit.fiesta.ui.login.signin.SignInFragment
 import com.ronasit.fiesta.ui.login.signin.SignInModule
 import com.ronasit.fiesta.ui.login.splash.SplashFragment
 import com.ronasit.fiesta.ui.login.splash.SplashModule
-import com.ronasit.fiesta.ui.schedule.ScheduleFragment
-import com.ronasit.fiesta.ui.schedule.ScheduleModule
+import com.ronasit.fiesta.ui.schedule.appointments.AppointmentsFragment
+import com.ronasit.fiesta.ui.schedule.appointments.AppointmentsModule
+import com.ronasit.fiesta.ui.schedule.clients.ClientsFragment
+import com.ronasit.fiesta.ui.schedule.clients.ClientsModule
+import com.ronasit.fiesta.ui.schedule.settings.SettingsFragment
+import com.ronasit.fiesta.ui.schedule.settings.SettingsModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -28,6 +32,13 @@ abstract class FragmentInjectorsModule {
     @ContributesAndroidInjector(modules = [ProfileModule::class])
     abstract fun profileFragmentInjector(): ProfileFragment
 
-    @ContributesAndroidInjector(modules = [ScheduleModule::class])
-    abstract fun scheduleFragmentInjector(): ScheduleFragment
+
+    @ContributesAndroidInjector(modules = [AppointmentsModule::class])
+    abstract fun appointmentsFragmentInjector(): AppointmentsFragment
+
+    @ContributesAndroidInjector(modules = [ClientsModule::class])
+    abstract fun clientsFragmentInjector(): ClientsFragment
+
+    @ContributesAndroidInjector(modules = [SettingsModule::class])
+    abstract fun settingsFragmentInjector(): SettingsFragment
 }
