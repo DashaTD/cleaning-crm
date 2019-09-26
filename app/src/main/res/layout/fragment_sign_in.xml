@@ -45,7 +45,7 @@
             android:inputType="phone"
             android:maxLength="17"
             android:singleLine="true"
-            android:background="@drawable/rounded_normal_unfocused_eddittext"
+            android:background="@drawable/rounded_normal_unfocused_edittext"
             android:text="@={viewModel.phoneNumber}"
             android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/continue_button"

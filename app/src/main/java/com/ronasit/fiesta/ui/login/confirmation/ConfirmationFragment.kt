@@ -15,7 +15,6 @@ import com.ronasit.fiesta.di.qualifiers.ViewModelInjection
 import com.ronasit.fiesta.ui.base.BaseFragment
 import com.ronasit.fiesta.ui.login.LoginVM
 import kotlinx.android.synthetic.main.fragment_confirmation.*
-import kotlinx.android.synthetic.main.fragment_sign_in.*
 import javax.inject.Inject
 
 class ConfirmationFragment : BaseFragment() {
@@ -53,7 +52,7 @@ class ConfirmationFragment : BaseFragment() {
             if (hasFocus) {
                 //code_edit.setBackgroundResource(R.drawable.rounded_normal_border_edittext)
             } else {
-                code_edit.setBackgroundResource(R.drawable.rounded_normal_unfocused_eddittext)
+                code_edit.setBackgroundResource(R.drawable.rounded_normal_unfocused_edittext)
             }
         }
         binding.codeEdit.addTextChangedListener(object : TextWatcher {

@@ -15,7 +15,6 @@ import com.ronasit.fiesta.di.qualifiers.ViewModelInjection
 import com.ronasit.fiesta.ui.base.BaseFragment
 import com.ronasit.fiesta.ui.login.LoginVM
 import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.fragment_sign_in.*
 import javax.inject.Inject
 
 class ProfileFragment : BaseFragment() {
@@ -51,14 +50,14 @@ class ProfileFragment : BaseFragment() {
 
         binding.firstNameText.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
-                first_name_text.setBackgroundResource(R.drawable.rounded_normal_unfocused_eddittext)
+                first_name_text.setBackgroundResource(R.drawable.rounded_normal_unfocused_edittext)
             } else {
                 first_name_text.setBackgroundResource(R.drawable.rounded_normal_border_edittext)
             }
         }
         binding.secondNameText.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
-                second_name_text.setBackgroundResource(R.drawable.rounded_normal_unfocused_eddittext)
+                second_name_text.setBackgroundResource(R.drawable.rounded_normal_unfocused_edittext)
             } else {
                 second_name_text.setBackgroundResource(R.drawable.rounded_normal_border_edittext)
             }
@@ -66,7 +65,7 @@ class ProfileFragment : BaseFragment() {
 
         binding.emailEditText.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
-                email_edit_text.setBackgroundResource(R.drawable.rounded_normal_unfocused_eddittext)
+                email_edit_text.setBackgroundResource(R.drawable.rounded_normal_unfocused_edittext)
             } else {
                 email_edit_text.setBackgroundResource(R.drawable.rounded_normal_border_edittext)
             }

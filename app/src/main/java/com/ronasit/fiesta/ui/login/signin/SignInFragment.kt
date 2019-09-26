@@ -52,7 +52,7 @@ class SignInFragment : BaseFragment() {
             if (hasFocus) {
                 //phone_field.setBackgroundResource(R.drawable.rounded_normal_border_edittext)
             } else {
-                phone_field.setBackgroundResource(R.drawable.rounded_normal_unfocused_eddittext)
+                phone_field.setBackgroundResource(R.drawable.rounded_normal_unfocused_edittext)
             }
         }
         binding.phoneField.addTextChangedListener( object : TextWatcher{
