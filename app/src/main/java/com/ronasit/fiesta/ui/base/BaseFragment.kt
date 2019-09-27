@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import androidx.annotation.LayoutRes
@@ -54,10 +55,12 @@ abstract class BaseFragment : DaggerFragment() {
     }
 
     fun showProgress() {
+        activity!!.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         progressView.visibility = View.VISIBLE
     }
 
     fun hideProgress() {
+        activity!!.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         progressView.visibility = View.GONE
     }
 }
