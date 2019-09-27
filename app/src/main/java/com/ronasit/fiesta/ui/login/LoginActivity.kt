@@ -22,7 +22,7 @@ class LoginActivity : BaseActivity(), HasSupportFragmentInjector {
     @Inject
     @ViewModelInjection
     lateinit var viewModel: ViewModelInjectionField<LoginVM>
-    lateinit var viewModelConfirm: ViewModelInjectionField<ProfileVM>
+
     override fun layoutRes() = R.layout.activity_main
 
     @RequiresApi(Build.VERSION_CODES.M)
