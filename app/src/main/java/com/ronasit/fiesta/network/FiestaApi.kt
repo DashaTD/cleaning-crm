@@ -14,15 +14,15 @@ import retrofit2.http.PUT
 
 interface FiestaApi {
 
-    @POST("/api/send-code")
+    @POST("/auth/send-code")
     fun sendCode(@Body request: GetCodeRequest): Completable
 
-    @POST("/api/authorize")
+    @POST("/auth/authorize")
     fun authorize(@Body request: AuthorizeRequest): Single<Response<AuthorizeResponse>>
 
-    @PUT("/api/profile")
+    @PUT("/profile")
     fun createProfile(@Body request: ProfileRequest): Single<Response<Void>>
 
-    @POST("/api/refresh")
+    @POST("/refresh")
     fun refreshToken(): Call<Void>
 }
