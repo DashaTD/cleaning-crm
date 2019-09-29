@@ -59,6 +59,19 @@
         <item name="android:textColor">#fff</item>
     </style>
 
+    <style name="SmallBoldWhite" parent="SmallTextWhite">
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+
+    <style name="SmallBoldGreen" parent="SmallTextBlack">
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:color">@color/green</item>
+    </style>
+
+    <style name="SmallBoldGray" parent="SmallBoldGreen">
+        <item name="android:color">@color/lightGray</item>
+    </style>
+
     <style name="BottomNavigationViewTextStyle" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textSize">11sp</item>

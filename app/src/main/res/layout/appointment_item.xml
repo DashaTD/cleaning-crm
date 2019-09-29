@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ronasit.fiesta.ui.schedule.appointments.AppointmentsVM" />
+    </data>
+
+    <ru.rambler.libs.swipe_layout.SwipeLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/appointment_borders">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="5dp"
+
+            android:orientation="horizontal"
+            app:gravity="center">
+
+            <TextView
+                android:id="@+id/time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="top"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:text=" 10 AM"
+                android:textAlignment="gravity"
+                android:textAppearance="@style/MediumTextBold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/confirmed_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="21dp"
+
+                android:layout_marginTop="3dp"
+                android:text="confirmed"
+                android:textAppearance="@style/SmallTextBlack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time_label" />
+
+            <TextView
+                android:id="@+id/name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="James jameson"
+                android:textAppearance="@style/MediumTextBold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.25"
+                app:layout_constraintStart_toEndOf="@+id/time_label"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/address_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="address"
+                android:textAppearance="@style/SmallTextBlack"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintHorizontal_bias="0.20"
+
+                app:layout_constraintStart_toEndOf="@+id/time_label"
+                app:layout_constraintTop_toBottomOf="@id/name_label" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/surface_view"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/delete_swipe_sub_item"
+            android:orientation="horizontal"
+            app:bring_to_clamp="170dp"
+            app:clamp="170dp"
+            app:gravity="right"
+            app:sticky="170dp">
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:onClick="@{()->viewModel.onDeleteClick()}"
+                android:text="Delete"
+                android:textAppearance="@style/SmallBoldWhite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edit_swipe_layout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/edit_swipe_layout"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@drawable/edit_swipe_sub_item"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/edit_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:onClick="@{()->viewModel.onEditClick()}"
+                    android:text="Edit"
+                    android:textAppearance="@style/SmallBoldWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ru.rambler.libs.swipe_layout.SwipeLayout>
+</layout>
