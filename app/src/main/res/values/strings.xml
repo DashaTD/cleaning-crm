@@ -19,4 +19,5 @@
     <string name="profile_is_invalid_toast">Invalid first name</string>
     <string name="profile_is_complete_toast">Welcome</string>
     <string name="error_message_small">Incorrect data</string>
+    <string name="confirmed_text">Confirmed</string>
 </resources>

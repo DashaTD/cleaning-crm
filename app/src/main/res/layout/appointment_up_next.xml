@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ronasit.fiesta.ui.schedule.appointments.AppointmentsVM" />
+    </data>
+
+    <ru.rambler.libs.swipe_layout.SwipeLayout
+        android:layout_width="match_parent"
+        android:layout_height="172dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/appointment_borders">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="5dp"
+
+            android:orientation="horizontal"
+            app:gravity="center">
+
+            <TextView
+                android:id="@+id/time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="top"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:text=" 10 AM"
+                android:textAlignment="gravity"
+                android:textAppearance="@style/MediumTextBold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/confirmed_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="21dp"
+                android:gravity="left"
+                android:layout_marginTop="3dp"
+                android:text="confirmed"
+                android:textAppearance="@style/SmallBoldGray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time_label" />
+
+            <TextView
+                android:id="@+id/name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="James jameson"
+                android:textAppearance="@style/MediumTextBold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.25"
+                app:layout_constraintStart_toEndOf="@+id/time_label"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/address_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="address"
+                android:textAppearance="@style/SmallTextBlack"
+
+                app:layout_constraintStart_toStartOf="@+id/name_label"
+                app:layout_constraintTop_toBottomOf="@id/name_label" />
+
+            <TextView
+                android:id="@+id/number_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textAppearance="@style/SmallTextBlack"
+                android:text="nomer telephona"
+                app:layout_constraintStart_toStartOf="@+id/address_label"
+                app:layout_constraintTop_toBottomOf="@+id/address_label" />
+
+            <TextView
+                android:id="@+id/access_code_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Access code: "
+                android:textAppearance="@style/SmallTextBlack"
+                app:layout_constraintStart_toStartOf="@+id/number_label"
+                app:layout_constraintTop_toBottomOf="@+id/number_label" />
+
+            <View
+                android:id="@+id/seporator_view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="124dp" />
+
+            <View
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:background="@drawable/black_circle"
+                app:layout_constraintStart_toEndOf="@+id/type_of_work_label"
+                app:layout_constraintEnd_toStartOf="@+id/duration_label"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seporator_view" />
+
+            <TextView
+                android:id="@+id/type_of_work_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Building"
+                style="@style/SmallTextBlack"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/access_code_label"
+                app:layout_constraintTop_toBottomOf="@+id/seporator_view" />
+
+            <TextView
+                android:id="@+id/duration_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                style="@style/SmallTextBlack"
+                android:text="0 hours"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/type_of_work_label"
+                app:layout_constraintTop_toBottomOf="@+id/seporator_view" />
+
+            <TextView
+                android:id="@+id/price_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                style="@style/SmallTextBlack"
+                android:text="$0.00"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/duration_label"
+                app:layout_constraintTop_toBottomOf="@+id/seporator_view" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/surface_view"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/delete_swipe_sub_item"
+            android:orientation="horizontal"
+            app:bring_to_clamp="170dp"
+            app:clamp="170dp"
+            app:gravity="right"
+            app:sticky="170dp">
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="Delete"
+                android:onClick="@{()->viewModel.onDeleteClick()}"
+                android:textAppearance="@style/SmallBoldWhite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edit_swipe_layout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/edit_swipe_layout"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@drawable/edit_swipe_sub_item"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/edit_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:text="Edit"
+                    android:onClick="@{()->viewModel.onEditClick()}"
+                    android:textAppearance="@style/SmallBoldWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ru.rambler.libs.swipe_layout.SwipeLayout>
+</layout>

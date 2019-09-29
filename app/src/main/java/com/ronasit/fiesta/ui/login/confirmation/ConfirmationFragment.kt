@@ -70,7 +70,6 @@ class ConfirmationFragment : BaseFragment() {
             }
         })
 
-
         return binding.root
     }
 
