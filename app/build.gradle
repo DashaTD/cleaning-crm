@@ -59,10 +59,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.releaseKey
+            manifestPlaceholders = [enableCrashReporting: "true", enableAnalyticsReporting: "true"]
         }
 
         debug {
             signingConfig signingConfigs.debugKey
+            manifestPlaceholders = [enableCrashReporting: "false", enableAnalyticsReporting: "false"]
         }
     }
 

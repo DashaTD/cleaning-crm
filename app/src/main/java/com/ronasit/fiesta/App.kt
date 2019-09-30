@@ -3,7 +3,6 @@ package com.ronasit.fiesta
 import android.app.Activity
 import android.app.Application
 import com.ronasit.fiesta.di.components.DaggerAppComponent
-import com.ronasit.fiesta.service.db.FiestaService
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -20,6 +19,10 @@ class App : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
+
+        if (BuildConfig.DEBUG) {
+
+        }
 
         Realm.init(this)
 
