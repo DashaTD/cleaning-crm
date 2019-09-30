@@ -25,7 +25,7 @@ interface FiestaApi {
     @PUT("/profile")
     fun createProfile(@Body request: ProfileRequest): Single<Response<Void>>
 
-    @POST("/refresh")
+    @POST("/auth/refresh")
     fun refreshToken(): Call<Void>
 
     @GET("/clients?all=1")
