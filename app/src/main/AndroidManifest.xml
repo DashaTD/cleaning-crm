@@ -21,9 +21,5 @@
         </activity>
         <activity android:name=".ui.schedule.ScheduleActivity" />
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="b5e532eb0eb36e13a9a41569a463cc4342792b00" />
-
     </application>
 </manifest>
