@@ -56,9 +56,9 @@ class ClientsService : IClientsService {
     }
 
     override fun deleteAll() {
-        realm.beginTransaction()
-        realm.delete(Client::class.java)
-        realm.commitTransaction()
+        realm.executeTransaction {
+            it.delete(Client::class.java)
+        }
     }
 
     override fun close() {
