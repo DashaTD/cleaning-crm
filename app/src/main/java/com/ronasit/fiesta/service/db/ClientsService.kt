@@ -11,6 +11,7 @@ interface IClientsService : IService {
     fun updateClient(client: Client)
     fun deleteClient(client: Client)
     fun deleteClient(id: String)
+    fun deleteAll()
 }
 
 class ClientsService : IClientsService {
@@ -51,6 +52,12 @@ class ClientsService : IClientsService {
         val realmClient = findById(id)
         realm.beginTransaction()
         realmClient!!.deleteFromRealm()
+        realm.commitTransaction()
+    }
+
+    override fun deleteAll() {
+        realm.beginTransaction()
+        realm.delete(Client::class.java)
         realm.commitTransaction()
     }
 

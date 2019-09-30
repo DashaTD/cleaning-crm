@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#AAA</color>
     <color name="colorAccent">#D81B60</color>
     <color name="lightGray">#999</color>
-    <color name="graySemiTransparent_20"> #33999999</color>
+    <color name="grayishWhite">#F4F5F6</color>
+    <color name="graySemiTransparent_20">#33999999</color>
     <color name="green">#87BF4A</color>
     <color name="pink">#D24C95</color>
     <color name="default_back">#F4F5F6</color>
