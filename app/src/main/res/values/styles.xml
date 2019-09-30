@@ -82,6 +82,12 @@
         <item name="android:textSize">11sp</item>
     </style>
 
+    <style name="ScheduleItemOptionsTextStyle">
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
     <style name="LargeButton" parent="Widget.AppCompat.Button">
         <item name="android:textAppearance">@style/ButtonTextAppearance</item>
         <item name="android:background">@drawable/confirmation_button_shape</item>
@@ -92,6 +98,13 @@
 
         <item name="android:background">@drawable/rounded_normal_unfocused_edittext</item>
         <item name="android:padding">14dp</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:background">@drawable/shape_search_view</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textCursorDrawable">@drawable/cursor</item>
     </style>
 
 </resources>

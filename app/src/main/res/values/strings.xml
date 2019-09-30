@@ -19,5 +19,8 @@
     <string name="profile_is_invalid_toast">Invalid first name</string>
     <string name="profile_is_complete_toast">Welcome</string>
     <string name="error_message_small">Incorrect data</string>
-    <string name="confirmed_text">Confirmed</string>
+    <string name="clients_option_delete">Delete</string>
+    <string name="clients_option_edit">Edit</string>
+    <string name="title_clients">Clients</string>
+    <string name="no_clients_yet">No clients yet</string>
 </resources>

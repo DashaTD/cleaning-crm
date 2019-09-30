@@ -10,7 +10,6 @@ import com.ronasit.fiesta.R
 import com.ronasit.fiesta.di.ViewModelInjectionField
 import com.ronasit.fiesta.di.qualifiers.ViewModelInjection
 import com.ronasit.fiesta.ui.base.BaseActivity
-import com.ronasit.fiesta.ui.login.profile.ProfileVM
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.fragment_confirmation.*
 import kotlinx.android.synthetic.main.fragment_profile.*
