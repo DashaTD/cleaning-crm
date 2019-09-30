@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "418116486780",
+    "firebase_url": "https://fiesta-android-5c9bd.firebaseio.com",
+    "project_id": "fiesta-android-5c9bd",
+    "storage_bucket": "fiesta-android-5c9bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418116486780:android:9959a3729ce696982aabf9",
+        "android_client_info": {
+          "package_name": "com.ronasit.fiesta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418116486780-85j5ise9jkvjhsn5uk319ldqvddof8h5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT2mWNYYVnbqUK7F6k9b0N09EOq6sg84c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418116486780-85j5ise9jkvjhsn5uk319ldqvddof8h5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
