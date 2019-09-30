@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -114,6 +115,26 @@ class AppointmentsFragment : BaseFragment() {
             layoutManager = viewManager
             adapter = viewAdapter
         }
+
+
+        val searchView: SearchView = binding.searchviewAppointments
+
+        searchView.setOnClickListener {
+            searchView.isIconified = false
+        }
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                //TODO: implement search
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                //TODO: implement
+                return true
+            }
+        })
+
         return binding.root
     }
 

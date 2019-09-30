@@ -53,7 +53,7 @@
                     style="@style/TitleTextWhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="17dp"
+                    android:layout_marginStart="24dp"
                     android:layout_marginTop="86dp"
                     android:text="Appointments"
                     app:layout_constraintStart_toStartOf="parent"
@@ -62,13 +62,11 @@
                 <SearchView
                     android:layout_width="0dp"
                     android:layout_height="39dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="17dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="16dp"
-
-                    android:layout_marginBottom="15dp"
-                    android:background="@drawable/search_button"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginEnd="15dp"
+                    android:id="@+id/searchview_appointments"
+                    android:theme="@style/SearchViewStyle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appointments_label" />
