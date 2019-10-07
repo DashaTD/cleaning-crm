@@ -1,8 +1,10 @@
 package com.ronasit.fiesta.network
 
+import com.ronasit.fiesta.network.requests.AddAppointmentRequest
 import com.ronasit.fiesta.network.requests.AuthorizeRequest
 import com.ronasit.fiesta.network.requests.GetCodeRequest
 import com.ronasit.fiesta.network.requests.ProfileRequest
+import com.ronasit.fiesta.network.responses.AddAppointmentResponse
 import com.ronasit.fiesta.network.responses.AuthorizeResponse
 import com.ronasit.fiesta.network.responses.GetClientsResponse
 import io.reactivex.Completable
@@ -30,4 +32,7 @@ interface FiestaApi {
 
     @GET("/clients?all=1")
     fun getClients(): Single<Response<GetClientsResponse>>
+
+    @POST("/appointments")
+    fun createAppointment(@Body request: AddAppointmentRequest): Single<Response<AddAppointmentResponse>>
 }

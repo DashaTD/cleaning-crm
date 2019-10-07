@@ -8,16 +8,18 @@ import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import javax.inject.Inject
 import com.ronasit.fiesta.R
 import com.ronasit.fiesta.databinding.FragmentAppointmentsBinding
-import com.ronasit.fiesta.di.qualifiers.ViewModelInjection
 import com.ronasit.fiesta.di.ViewModelInjectionField
+import com.ronasit.fiesta.di.qualifiers.ViewModelInjection
 import com.ronasit.fiesta.ui.base.BaseFragment
+import com.ronasit.fiesta.ui.schedule.appointments.newAppointment.NewAppointmentBottomSheet
+import javax.inject.Inject
+
 
 class AppointmentsFragment : BaseFragment() {
 
-    override fun layoutRes() = R.layout.fragment_appointments
+    override fun layoutRes() = com.ronasit.fiesta.R.layout.fragment_appointments
 
     //private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -40,6 +42,14 @@ class AppointmentsFragment : BaseFragment() {
     ): View? {
         val binding = FragmentAppointmentsBinding.inflate(inflater, container, false)
         binding.recyclerList.layoutManager = LinearLayoutManager(context)
+        binding.viewModel = viewModel.get()
+
+        with(viewModel.get()) {
+            newFr.observe(this@AppointmentsFragment, Observer {
+                if (context != null) openDialog()
+            })
+        }
+
         val items = listOf(
             AppointmentItem(
                 "firstN",
@@ -142,7 +152,10 @@ class AppointmentsFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
     }
 
-    fun addClick(view: View) {
-
+    private fun openDialog() {
+        val view = layoutInflater.inflate(R.layout.fragment_new_appointment, null)
+        val dialog = NewAppointmentBottomSheet()
+        dialog.viewModel = viewModel.get()
+        dialog.show(activity!!.supportFragmentManager, "name")
     }
 }

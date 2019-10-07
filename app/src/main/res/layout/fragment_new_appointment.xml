@@ -1,0 +1,258 @@
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="bottomSheet"
+            type="com.ronasit.fiesta.network.requests.AddAppointmentRequest" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:text="@string/cancel_text"
+                android:textAppearance="@style/TextStylePink"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/schedule_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:text="@string/schedule_text"
+                android:textAppearance="@style/MediumTextBoldPink"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/inner_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp">
+
+                <TextView
+                    android:id="@+id/new_appointment_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:text="@string/new_appointment_text"
+                    android:textAppearance="@style/TitleTextBlack"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/seporator_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/transporentBlack"
+                    app:layout_constraintTop_toBottomOf="@+id/new_appointment_label" />
+
+                <EditText
+                    android:id="@+id/client_text"
+                    style="@style/EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:inputType="text"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/edit_text_shape"
+                    android:ems="10"
+                    android:hint="@string/client_label"
+                    android:textAppearance="@style/InputHintTextAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/seporator_view" />
+
+                <TextView
+                    android:id="@+id/start_time_label"
+                    style="@style/TextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="35dp"
+                    android:text="@string/start_time_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/client_text" />
+
+                <TextView
+                    android:id="@+id/start_time"
+                    style="@style/MediumTextBold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="Aug 17 10:00 AM"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/start_time_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/start_time_label" />
+
+                <View
+                    android:id="@+id/seporator_mini"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="18dp"
+                    android:background="#F4F5F6"
+                    app:layout_constraintTop_toBottomOf="@id/start_time_label" />
+
+                <TextView
+                    android:id="@+id/duration_label"
+                    style="@style/TextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="17dp"
+                    android:text="@string/duration_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/seporator_mini" />
+
+                <TextView
+                    android:id="@+id/duration_time"
+                    style="@style/MediumTextBold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="0 minutes"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/duration_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/duration_label" />
+
+                <View
+                    android:id="@+id/seporator_mini2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="18dp"
+                    android:background="#F4F5F6"
+                    app:layout_constraintTop_toBottomOf="@id/duration_time" />
+
+                <TextView
+                    android:id="@+id/price_label"
+                    style="@style/TextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="17dp"
+                    android:text="@string/price_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/seporator_mini2" />
+
+                <TextView
+                    android:id="@+id/price_text"
+                    style="@style/MediumTextBold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="$0"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/price_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/price_label" />
+
+                <View
+                    android:id="@+id/seporator_mini3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="18dp"
+                    android:background="#F4F5F6"
+                    app:layout_constraintTop_toBottomOf="@id/price_text" />
+
+                <EditText
+                    android:id="@+id/activity_text"
+                    style="@style/EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/edit_text_shape"
+                    android:ems="10"
+                    android:hint="@string/activity_text"
+                    android:text="@={bottomSheet.activity}"
+                    android:inputType="textPersonName"
+                    android:textAppearance="@style/InputHintTextAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/seporator_mini3" />
+
+                <EditText
+                    android:id="@+id/notes_text"
+                    style="@style/EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/edit_text_shape"
+                    android:ems="10"
+                    android:hint="@string/notes_text"
+                    android:text="@={bottomSheet.notes}"
+                    android:inputType="textPersonName"
+                    android:textAppearance="@style/InputHintTextAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_text" />
+
+                <TextView
+                    android:id="@+id/optional_label2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/optional"
+                    android:textAppearance="@style/SmallTextGray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/notes_text" />
+
+                <TextView
+                    android:id="@+id/request_confirmation_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="40dp"
+                    android:text="@string/request_client_confirmation_text"
+                    android:textAppearance="@style/TextStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/notes_text" />
+
+                <Switch
+                    android:id="@+id/request_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:checked="true"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/request_confirmation_label"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</layout>

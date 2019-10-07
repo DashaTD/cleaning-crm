@@ -12,7 +12,7 @@ open class Appointment: RealmObject(){
     @Ignore
     var client: Client? = null
     var time: Date? = null
-    var durationHours: Int? = null
+    var durationMinutes: Int? = null
     var price: Float? = null
     var activity: String? = null
     var note: String? = null

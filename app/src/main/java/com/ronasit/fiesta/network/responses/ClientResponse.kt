@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName
 
 class ClientResponse {
 
+    @SerializedName("id")
+    @Expose
+    var id: Int = 0
+
     @SerializedName("mobile_phone")
     @Expose
     var mobilePhone: String = ""

@@ -67,7 +67,7 @@ class ScheduleActivity : BaseActivity() {
             }
         }
 
-    private fun switchFragment(fragment: Fragment) {
+    fun switchFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.nav_host_fragment, fragment)
         transaction.addToBackStack(null)
