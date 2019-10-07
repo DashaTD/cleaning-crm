@@ -20,7 +20,6 @@ class SplashVM @Inject constructor() : BaseViewModel() {
             if (isProfileCompleted()) {
 
                 loginVM.moveToScheduleActivity()
-                userService.findUser()?.token?.let { NetworkModule.authToken = it }
             } else {
                 loginVM.moveToSignInFragment()
             }

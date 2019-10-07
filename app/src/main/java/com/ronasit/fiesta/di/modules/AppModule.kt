@@ -18,4 +18,10 @@ class AppModule {
     @Singleton
     fun provideApplicationContext(app: App): Context = app.applicationContext
 
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(app: App) = app.getSharedPreferences("app",
+        Context.MODE_PRIVATE
+    )
+
 }

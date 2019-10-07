@@ -1,7 +1,6 @@
 package com.ronasit.fiesta.ui.login.confirmation
 
 import androidx.lifecycle.MutableLiveData
-import com.ronasit.fiesta.di.modules.NetworkModule
 import com.ronasit.fiesta.model.User
 import com.ronasit.fiesta.network.requests.AuthorizeRequest
 import com.ronasit.fiesta.network.responses.AuthorizeResponse
@@ -69,8 +68,6 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
             loginVM.isCodeValid.value = true
             updateProfile(User.createUser(authResponse))
 
-            NetworkModule.authToken = "${authResponse.tokenType} ${authResponse.accessToken}"
-
             when (authorizeResponse.code()) {
                 200 -> loginVM.moveToScheduleActivity()
                 202 -> loginVM.moveToProfileFragment()
@@ -80,6 +77,7 @@ class ConfirmationVM @Inject constructor() : BaseViewModel() {
 
     private fun updateProfile(user: User) {
         userService.updateUser(user)
+        sharedPreferences.edit().putString("authToken", user.token).apply()
     }
 
     private fun onAuthorizationError(throwable: Throwable) {

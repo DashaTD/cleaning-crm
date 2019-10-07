@@ -78,10 +78,12 @@ class ProfileVM @Inject constructor() : BaseViewModel() {
 
     private fun onAuthorizationError() {
         userService.updateToken("")
+        sharedPreferences.edit().putString("authToken", "").apply()
     }
 
     private fun onProfileRequestSuccess() {
         userService.updateUser(profile)
+
         showProgress.value = false
         loginVM.moveToScheduleActivity()
     }
