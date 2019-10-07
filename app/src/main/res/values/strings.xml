@@ -25,4 +25,14 @@
     <string name="no_clients_yet">No clients yet</string>
 
     <string name="confirmed_text">Confirmed</string>
+    <string name="cancel_text">Cancel</string>
+    <string name="schedule_text">Schedule</string>
+    <string name="new_appointment_text">New appointment</string>
+    <string name="client_label">Client</string>
+    <string name="start_time_text">Start</string>
+    <string name="duration_text">Duration</string>
+    <string name="price_text">Price</string>
+    <string name="activity_text">Activity</string>
+    <string name="notes_text">Notes</string>
+    <string name="request_client_confirmation_text">Request client confirmation</string>
 </resources>
