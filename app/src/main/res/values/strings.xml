@@ -25,6 +25,18 @@
     <string name="no_clients_yet">No clients yet</string>
 
     <string name="confirmed_text">Confirmed</string>
+    <string name="title_client_creation">New client</string>
+    <string name="button_save">Save</string>
+    <string name="placeholder_zip_code">Zip code</string>
+    <string name="search_view_placeholder">Search</string>
+    <string name="placeholder_address">Address</string>
+    <string name="example_address">Rochester, NY</string>
+    <string name="placeholder_access_code">Access code</string>
+    <string name="placeholder_access_information">Access information</string>
+    <string name="toast_internet_connection_error">Failed to connect to server</string>
+    <string name="toast_client_deletion_failed">Failed to delete client</string>
+    <string name="button_edit">Edit</string>
+    <string name="button_cancel">Cancel</string>
     <string name="cancel_text">Cancel</string>
     <string name="schedule_text">Schedule</string>
     <string name="new_appointment_text">New appointment</string>

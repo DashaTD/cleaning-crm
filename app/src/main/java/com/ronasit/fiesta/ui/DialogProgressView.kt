@@ -1,31 +1,21 @@
-package com.ronasit.fiesta.ui.base
+package com.ronasit.fiesta.ui
 
 import android.app.Activity
-import android.content.Context
-import android.os.Bundle
-import android.view.LayoutInflater
+import android.app.Dialog
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
-import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import com.ronasit.fiesta.R
-import dagger.android.support.DaggerFragment
-import javax.inject.Inject
+import kotlinx.android.synthetic.main.dialog_fragment_add_client.*
 
-abstract class BaseFragment : DaggerFragment() {
-
-    @LayoutRes
-    abstract fun layoutRes(): Int
-
-    @Inject
-    lateinit var applicationContext: Context
+class DialogProgressView(private val activity: Activity, private val dialog: Dialog) {
 
     private val progressBar by lazy {
-        ProgressBar(activity!!, null, android.R.attr.progressBarStyle).apply {
+        ProgressBar(activity, null, android.R.attr.progressBarStyle).apply {
             val params = RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT
@@ -36,7 +26,7 @@ abstract class BaseFragment : DaggerFragment() {
     }
 
     private val progressView by lazy {
-        RelativeLayout(activity!!).apply {
+        LinearLayout(activity).apply {
             val params = RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT
@@ -44,34 +34,32 @@ abstract class BaseFragment : DaggerFragment() {
             layoutParams = params
             setBackgroundColor(ContextCompat.getColor(context, R.color.graySemiTransparent_20))
             addView(progressBar)
-            activity!!.addContentView(this, params)
+            dialog.addContentView(this, params)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(layoutRes(), container, false)
-    }
-
-    fun showProgress() {
-        activity!!.window.setFlags(
+    fun show() {
+        activity.window.setFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
         )
-        progressView.visibility = View.VISIBLE
+        dialog.window!!.setFlags(
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        )
         hideKeyboard()
+        progressView.visibility = View.VISIBLE
     }
 
     private fun hideKeyboard() {
-        val imm = activity!!.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(this.view?.windowToken, 0)
+        val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(dialog.view.windowToken,0)
     }
 
-    fun hideProgress() {
-        activity!!.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    fun hide() {
+        activity.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        dialog.window!!.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         progressView.visibility = View.GONE
     }
+
 }

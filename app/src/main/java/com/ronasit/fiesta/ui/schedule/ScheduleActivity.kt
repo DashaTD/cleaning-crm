@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ronasit.fiesta.R
 import com.ronasit.fiesta.di.ViewModelInjectionField
@@ -20,6 +17,8 @@ import javax.inject.Inject
 
 class ScheduleActivity : BaseActivity() {
 
+    lateinit var navigation: BottomNavigationView
+
     @Inject
     @ViewModelInjection
     lateinit var viewModel: ViewModelInjectionField<ScheduleVM>
@@ -29,20 +28,15 @@ class ScheduleActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val navigation =
+        navigation =
             findViewById<View>(R.id.bottom_navigation) as BottomNavigationView
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         switchFragment(AppointmentsFragment())
         navigation.itemIconTintList = null
-//
-//        val navController: NavController = findNavController(R.id.nav_host_fragment)
-//
-//        navigation.setupWithNavController(navController)
 
     }
-
 
     private val mOnNavigationItemSelectedListener =
         object : BottomNavigationView.OnNavigationItemSelectedListener {
@@ -73,5 +67,4 @@ class ScheduleActivity : BaseActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
-
 }

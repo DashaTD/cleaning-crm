@@ -2,15 +2,13 @@ package com.ronasit.fiesta.network.responses
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.ronasit.fiesta.network.ClientModel
 
 class GetClientsResponse {
-    @SerializedName("current_page")
-    @Expose
-    var currentPage: Int = 1
 
     @SerializedName("data")
     @Expose
-    var data: Array<ClientResponse> = emptyArray()
+    var data: Array<ClientModel> = emptyArray()
 
     @SerializedName("total")
     @Expose

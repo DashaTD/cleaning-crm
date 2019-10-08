@@ -11,10 +11,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 interface FiestaApi {
 
@@ -33,6 +30,15 @@ interface FiestaApi {
     @GET("/clients?all=1")
     fun getClients(): Single<Response<GetClientsResponse>>
 
+    @POST("/clients")
+    fun createClient(@Body request: ClientModel): Single<Response<ClientModel>>
+
+    @PUT("/clients/{id}")
+    fun updateClient(@Path("id") id: Int, @Body request: ClientModel): Single<Response<Void>>
+
+    @DELETE("/clients/{id}")
+    fun deleteClient(@Path("id") id: Int): Single<Response<Void>>
+    
     @POST("/appointments")
     fun createAppointment(@Body request: AddAppointmentRequest): Single<Response<AddAppointmentResponse>>
 }
