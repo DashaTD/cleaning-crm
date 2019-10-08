@@ -1,0 +1,265 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ronasit.fiesta.ui.schedule.clients.creation.AddClientVM" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_add_client_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/button_save"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginEnd="38dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{()->viewModel.onSaveButtonClick()}"
+                    android:padding="5dp"
+                    android:text="@string/button_save"
+                    android:textAppearance="@style/AddClientButtonSaveTextStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/button_cancel"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginTop="11dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{()->viewModel.onCancelButtonClick()}"
+                    android:padding="5dp"
+                    android:text="@string/button_cancel"
+                    android:textAppearance="@style/AddClientButtonCancelTextStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/TitleTextBlack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="94dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="@{viewModel.isNewClient() ? @string/title_client_creation : viewModel.getClientName()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/lightGray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title" />
+
+
+                <EditText
+                    android:id="@+id/edit_first_name"
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/rounded_normal_unfocused_edittext"
+                    android:hint="@string/first_name"
+                    android:inputType="textPersonName"
+                    android:maxLength="180"
+                    android:text="@={viewModel.clientModel.firstName}"
+                    android:textAppearance="@style/InputHintTextAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/view" />
+
+                <EditText
+                    android:id="@+id/edit_last_name"
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/rounded_normal_unfocused_edittext"
+                    android:hint="@string/last_name"
+                    android:inputType="textPersonName"
+                    android:maxLength="180"
+                    android:text="@={viewModel.clientModel.lastName}"
+                    android:textAppearance="@style/InputHintTextAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_first_name" />
+
+                <TextView
+                    android:id="@+id/textview_optional_last_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/optional"
+                    android:textAppearance="@style/SmallTextGray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_last_name" />
+
+                <EditText
+                    android:id="@+id/edit_phone_number"
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/rounded_normal_unfocused_edittext"
+                    android:hint="@string/phone_field_placeholder"
+                    android:inputType="phone"
+                    android:maxLength="30"
+                    android:text="@={viewModel.clientModel.mobilePhone}"
+                    android:textAppearance="@style/InputHintTextAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_optional_last_name" />
+
+                <EditText
+                    android:id="@+id/edit_email"
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/rounded_normal_unfocused_edittext"
+                    android:hint="@string/email_address"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="180"
+                    android:text="@={viewModel.clientModel.email}"
+                    android:textAppearance="@style/InputHintTextAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_phone_number" />
+
+                <TextView
+                    android:id="@+id/textview_optional_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/optional"
+                    android:textAppearance="@style/SmallTextGray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_email" />
+
+                <EditText
+                    android:id="@+id/edit_zip_code"
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/rounded_normal_unfocused_edittext"
+                    android:hint="@string/placeholder_zip_code"
+                    android:inputType="number"
+                    android:maxLength="180"
+                    android:text="@={viewModel.clientModel.zipCode}"
+                    android:textAppearance="@style/InputHintTextAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_optional_email" />
+
+                <EditText
+                    android:id="@+id/edit_address"
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/rounded_normal_unfocused_edittext"
+                    android:hint="@string/placeholder_address"
+                    android:inputType="textPersonName"
+                    android:maxLength="180"
+                    android:text="@={viewModel.clientModel.address}"
+                    android:textAppearance="@style/InputHintTextAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_zip_code" />
+
+                <TextView
+                    android:id="@+id/textview_address_example"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/example_address"
+                    android:textAppearance="@style/SmallTextGray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_address" />
+
+                <EditText
+                    android:id="@+id/edit_access_code"
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/rounded_normal_unfocused_edittext"
+                    android:hint="@string/placeholder_access_code"
+                    android:inputType="number"
+                    android:maxLength="180"
+                    android:text="@={viewModel.clientModel.accessCode}"
+                    android:textAppearance="@style/InputHintTextAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_address_example" />
+
+                <EditText
+                    android:id="@+id/edit_access_information"
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="18dp"
+                    android:background="@drawable/rounded_normal_unfocused_edittext"
+                    android:hint="@string/placeholder_access_information"
+                    android:inputType="textMultiLine|text"
+                    android:maxLength="180"
+                    android:text="@={viewModel.clientModel.accessInformation}"
+                    android:textAppearance="@style/InputHintTextAppearance"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_access_code" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

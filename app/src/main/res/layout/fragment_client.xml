@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ronasit.fiesta.ui.schedule.client.ClientVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bm_appointments"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <Button
+                        android:id="@+id/button_back"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="21dp"
+                        android:layout_marginTop="21dp"
+                        android:background="@drawable/ic_back_white"
+                        android:onClick="@{() -> viewModel.onBackButtonClick()}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/button_edit"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="21dp"
+                        android:layout_marginEnd="21dp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:onClick="@{() -> viewModel.onEditButtonClick()}"
+                        android:padding="5dp"
+                        android:text="@string/button_edit"
+                        android:textAppearance="@style/ButtonTextAppearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="86dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="21dp"
+                        android:text="@{viewModel.getClientName()}"
+                        android:textAppearance="@style/TitleTextWhite"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraintLayout_header">
+
+
+                    <TextView
+                        android:id="@+id/textView_phone_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="21dp"
+                        android:layout_marginEnd="23dp"
+                        android:text="@{viewModel.getPhoneNumber()}"
+                        android:textAlignment="textStart"
+                        android:textAppearance="@style/ClientFragmentTextStyleAccent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView_email"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="23dp"
+                        android:text="@{viewModel.getEmail()}"
+                        android:textAlignment="textStart"
+                        android:textAppearance="@style/ClientFragmentTextStyleAccent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textView_phone_number" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="81dp"
+                        android:layout_marginTop="31dp"
+                        android:background="@drawable/selector_shape_button_round"
+                        android:onClick="@{() -> viewModel.onPhoneCallButtonClick()}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_email"
+                        app:srcCompat="@drawable/selector_ic_phone" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton2"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="69dp"
+                        android:layout_marginTop="31dp"
+                        android:layout_marginEnd="81dp"
+                        android:background="@drawable/selector_shape_button_round"
+                        android:onClick="@{() -> viewModel.onEmailButtonClick()}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageButton"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_email"
+                        app:srcCompat="@drawable/selector_ic_email" />
+
+                    <TextView
+                        android:id="@+id/textView_zip_code"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="45dp"
+                        android:layout_marginEnd="23dp"
+                        android:text="@{viewModel.getZipCode()}"
+                        android:textAlignment="textStart"
+                        android:textAppearance="@style/ClientFragmentTextStyle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="23dp"
+                        android:text="@{viewModel.getAddress()}"
+                        android:textAlignment="textStart"
+                        android:textAppearance="@style/ClientFragmentTextStyle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_zip_code" />
+
+                    <TextView
+                        android:id="@+id/textView_access_code"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="23dp"
+                        android:text='@{"access code: " + viewModel.getAccessCode()}'
+                        android:textAlignment="textStart"
+                        android:textAppearance="@style/ClientFragmentTextStyle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+                    <TextView
+                        android:id="@+id/textView_access_information"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="23dp"
+                        android:text="@{viewModel.getAccessInformation()}"
+                        android:textAlignment="textStart"
+                        android:textAppearance="@style/ClientFragmentTextStyle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_access_code" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grayishWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,8 +1,10 @@
 package com.ronasit.fiesta.ui.schedule.clients
 
 import androidx.lifecycle.MutableLiveData
+import com.ronasit.fiesta.base.SingleLiveEvent
 import com.ronasit.fiesta.model.Client
-import com.ronasit.fiesta.network.responses.ClientResponse
+import com.ronasit.fiesta.network.ClientModel
+import com.ronasit.fiesta.network.responses.GetClientsResponse
 import com.ronasit.fiesta.service.db.ClientsService
 import com.ronasit.fiesta.ui.base.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,22 +15,29 @@ class ClientsVM @Inject constructor() : BaseViewModel() {
 
     private val clientsService: ClientsService by lazy { ClientsService() }
 
-    val clients = MutableLiveData<Array<DisplayedClient>>()
+    lateinit var clientsAdapter: ClientsAdapter
 
-    private fun Client.createDisplayedClient(): DisplayedClient {
-        val lastName = if (this.lastName == null) "" else this.lastName
-        val name = "${this.firstName} $lastName"
-        val address = "${this.address}, ${this.zipCode}"
-        var phoneNumber = ""
-        this.phoneNumber?.let {
-            phoneNumber = it
-        }
+    val clients = MutableLiveData<List<Client>>()
 
-        return DisplayedClient(name, address, phoneNumber)
+    val onClientClick = SingleLiveEvent<Client>()
+
+    val onCreateOrEditClick = SingleLiveEvent<ClientModel>()
+
+    val onDeleteClientFail = SingleLiveEvent<Void>()
+
+    val onInternetConnectionError = SingleLiveEvent<Void>()
+
+    init {
+        val clientClickListener: ClientsAdapter.ClientClickListener = createOnClientClickListener()
+        clients.value?.let {
+            clientsAdapter = ClientsAdapter(it, clientClickListener)
+        } ?: run { clientsAdapter = ClientsAdapter(emptyList(), clientClickListener) }
     }
 
     fun loadCachedClients() {
-        clients.value = createDisplayedClients(clientsService.findAll().toTypedArray())
+        val clients = clientsService.findAll()
+        this.clients.value = clients
+        clientsAdapter.setClients(clients)
     }
 
     fun loadRemoteClients() {
@@ -36,36 +45,76 @@ class ClientsVM @Inject constructor() : BaseViewModel() {
             fiestaApi.getClients().subscribeOn(
                 Schedulers.newThread()
             )
-                .observeOn(AndroidSchedulers.mainThread()).subscribe({
-                    it.body()?.let { it ->
-                        val respondedClients: Array<ClientResponse> = it.data
-
-                        val clients = Array(respondedClients.size) {
-                            Client.create(respondedClients[it])
-                        }
-
-                        updateCachedClients(clients)
-                        this.clients.value = createDisplayedClients(clients)
+                .observeOn(AndroidSchedulers.mainThread()).subscribe({ response ->
+                    if (response.code() == 200) {
+                        response.body()?.let { onGetClientsRequestSuccess(it) }
                     }
                 }, {
-
+                    onInternetConnectionError.call()
                 })
         )
     }
 
-    private fun updateCachedClients(clients: Array<Client>) {
-        clientsService.deleteAll()
-        clients.forEach { clientsService.insertClient(it) }
+    private fun onGetClientsRequestSuccess(getClientsResponse: GetClientsResponse) {
+        val respondedClients: Array<ClientModel> = getClientsResponse.data
+
+        val clients = respondedClients.map {
+            Client.create(it)
+        }
+
+        updateCachedClients(clients)
+        this.clients.value = clients
+        clientsAdapter.setClients(clients)
     }
 
-    private fun createDisplayedClients(clients: Array<Client>): Array<DisplayedClient> {
-        return Array(clients.size) {
-            clients[it].createDisplayedClient()
+    private fun updateCachedClients(clients: List<Client>) {
+        clientsService.deleteAll()
+        clientsService.insertClients(clients)
+    }
+
+    fun onAddButtonClick() {
+        onCreateOrEditClick.value = ClientModel()
+    }
+
+    private fun createOnClientClickListener() = object : ClientsAdapter.ClientClickListener {
+        override fun onClientClick(client: Client) {
+            onClientClick.value = client
+        }
+
+        override fun onEditClientClick(client: Client) {
+            val clientModel = ClientModel.create(client)
+            clientModel.isEditting = true
+            onCreateOrEditClick.value = clientModel
+        }
+
+        override fun onDeleteClientClick(client: Client) {
+            showProgress.value = true
+            sendDeleteClientRequest(client.id)
         }
     }
 
-    fun onAddClientButtonClick() {
-        //TODO: move to client creation fragment
+    private fun sendDeleteClientRequest(clientId: Int) {
+        compositeDisposable.add(
+
+            fiestaApi.deleteClient(clientId).subscribeOn(
+                Schedulers.newThread()
+            )
+                .observeOn(AndroidSchedulers.mainThread()).subscribe({ response ->
+                    when (response.code()) {
+                        204 -> {
+                            clientsService.deleteClient(clientId)
+                            loadCachedClients()
+                        }
+                        403 -> onDeleteClientFail.call()
+                    }
+                    showProgress.value = false
+
+                }, {
+                    onInternetConnectionError.call()
+                    showProgress.value = false
+                })
+        )
     }
 
 }
+

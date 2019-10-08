@@ -6,6 +6,7 @@
     <color name="lightGray">#999</color>
     <color name="grayishWhite">#F4F5F6</color>
     <color name="graySemiTransparent_20">#33999999</color>
+    <color name="pinkSemiTransparent_40">#66D24C95</color>
     <color name="green">#87BF4A</color>
     <color name="pink">#D24C95</color>
     <color name="transporentBlack">#19000000</color>
