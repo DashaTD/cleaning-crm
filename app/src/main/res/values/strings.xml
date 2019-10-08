@@ -47,4 +47,8 @@
     <string name="activity_text">Activity</string>
     <string name="notes_text">Notes</string>
     <string name="request_client_confirmation_text">Request client confirmation</string>
+    <string name="imagebutton_description_add_appointment">Add appointment button</string>
+    <string name="imagebutton_description_add_client">Add client button</string>
+    <string name="imagebutton_description_call_the_client">Make a phone call to the client</string>
+    <string name="imagebutton_description_write_sms_to_client">Start writing sms message to the client</string>
 </resources>

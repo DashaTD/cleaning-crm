@@ -130,7 +130,8 @@
                         android:onClick="@{() -> viewModel.onPhoneCallButtonClick()}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView_email"
-                        app:srcCompat="@drawable/selector_ic_phone" />
+                        app:srcCompat="@drawable/selector_ic_phone"
+                        android:contentDescription="@string/imagebutton_description_call_the_client" />
 
                     <ImageButton
                         android:id="@+id/imageButton2"
@@ -145,7 +146,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageButton"
                         app:layout_constraintTop_toBottomOf="@+id/textView_email"
-                        app:srcCompat="@drawable/selector_ic_email" />
+                        app:srcCompat="@drawable/selector_ic_email"
+                        android:contentDescription="@string/imagebutton_description_write_sms_to_client" />
 
                     <TextView
                         android:id="@+id/textView_zip_code"

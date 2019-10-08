@@ -37,16 +37,18 @@
                 tools:layout_editor_absoluteX="204dp"
                 android:background="@drawable/bm_appointments">
 
-                <Button
+                <ImageButton
                     android:id="@+id/add_circle_button"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="21dp"
-                    android:layout_marginEnd="21dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:onClick="@{()->viewModel.onAddClick()}"
-                    android:background="@drawable/ic_add_circle"
+                    android:src="@drawable/ic_add_circle"
+                    android:background="@android:color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/imagebutton_description_add_appointment" />
 
                 <TextView
                     android:id="@+id/appointments_label"

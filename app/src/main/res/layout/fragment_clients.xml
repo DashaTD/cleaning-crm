@@ -38,16 +38,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/add_circle_button"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="21dp"
-                android:layout_marginEnd="21dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:src = "@drawable/ic_add_circle"
                 android:onClick="@{()-> viewModel.onAddButtonClick()}"
-                android:background="@drawable/ic_add_circle"
+                android:background="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/imagebutton_description_add_client" />
 
             <SearchView
                 android:id="@+id/searchView_clients"
