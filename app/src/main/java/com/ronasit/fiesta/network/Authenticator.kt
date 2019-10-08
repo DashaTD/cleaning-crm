@@ -51,6 +51,7 @@ class AuthInterceptor @Inject constructor(private val sharedPref: SharedPreferen
                     Log.d("TOKEN", "repeat with new token $authorizationToken")
 
                     return response.request.newBuilder()
+                        .removeHeader("Authorization")
                         .addHeader("Authorization", authorizationToken)
                         .build()
                 } ?: return null
