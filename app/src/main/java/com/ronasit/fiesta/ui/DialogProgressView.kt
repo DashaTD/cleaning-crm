@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
@@ -26,13 +25,13 @@ class DialogProgressView(private val activity: Activity, private val dialog: Dia
     }
 
     private val progressView by lazy {
-        LinearLayout(activity).apply {
+        RelativeLayout(activity).apply {
             val params = RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT
             )
-            layoutParams = params
             setBackgroundColor(ContextCompat.getColor(context, R.color.graySemiTransparent_20))
+            layoutParams = params
             addView(progressBar)
             dialog.addContentView(this, params)
         }
@@ -53,7 +52,7 @@ class DialogProgressView(private val activity: Activity, private val dialog: Dia
 
     private fun hideKeyboard() {
         val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(dialog.view.windowToken,0)
+        imm.hideSoftInputFromWindow(dialog.view.windowToken, 0)
     }
 
     fun hide() {
